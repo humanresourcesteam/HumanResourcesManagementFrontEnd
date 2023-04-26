@@ -1,0 +1,80 @@
+:root {
+  --first-color: #0b2447;
+  --second-color: #19376d;
+  --third-color: #576cbc;
+  --light-color: #a5d7e8;
+}
+
+.single {
+  display: flex;
+  width: 100%;
+  .singleContainer {
+    flex: 7;
+
+    .top {
+      padding: 20px;
+      display: flex;
+      gap: 50px;
+      .left {
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+        position: relative;
+
+        .title {
+          font-weight: bold;
+          color: var(--first-color);
+          font-size: 28px;
+          margin-bottom: 20px;
+        }
+        .editButton {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 5px;
+          font-size: 14px;
+          color: #7451f8;
+          background-color: #7551f849;
+          cursor: pointer;
+          border-radius: 0px 0px 0 5px;
+        }
+        .item {
+          display: flex;
+          gap: 40px;
+          .itemImg {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+          }
+        }
+        .details {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .itemTitle {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .detailItem {
+            display: flex;
+            gap: 5px;
+            .icon {
+              font-size: 18px;
+            }
+            .itemKey {
+              font-weight: 600;
+              font-size: 14px;
+            }
+            .itemValue {
+              font-size: 14px;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+      .right {
+        flex: 2;
+      }
+    }
+  }
+}
