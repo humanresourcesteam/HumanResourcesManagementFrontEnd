@@ -6,6 +6,7 @@
 }
 
 .widgetNew {
+  flex: 2;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   border-radius: 15px;
@@ -13,7 +14,7 @@
   .widgetSmTitle {
     font-size: 22px;
     font-weight: 600;
-    color: var(--first-color);
+    color: #467599;
   }
   .widgetSmImg {
     width: 40px;
@@ -28,9 +29,9 @@
     .widgetSmListItem {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-around;
       margin: 20px 0px;
-      gap: 20px;
+      gap: 0px;
 
       .widgetSmEmployee {
         display: flex;

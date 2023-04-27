@@ -16,7 +16,7 @@ export const managerColumns = [
   { field: "surname", headerName: "Surname", width: 200 },
   { field: "phone", headerName: "Phone", width: 200 },
   { field: "email", headerName: "Email", width: 200 },
-  { field: "address", headerName: "Address", width: 250 },
+  { field: "address", headerName: "Address", width: 350 },
 ];
 
 export const managerRows = [
@@ -27,7 +27,7 @@ export const managerRows = [
     surname: "Ozturk",
     email: "melihcan@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ export const managerRows = [
     surname: "Yardımcı",
     email: "berkin@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 12,
@@ -45,7 +45,7 @@ export const managerRows = [
     surname: "Yardımcı",
     email: "berkin@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 22,
@@ -54,7 +54,7 @@ export const managerRows = [
     surname: "Yardımcı",
     email: "berkin@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 32,
@@ -63,7 +63,7 @@ export const managerRows = [
     surname: "Yardımcı",
     email: "berkin@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 6,
@@ -72,7 +72,7 @@ export const managerRows = [
     surname: "Çankaya",
     email: "berkin@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 66,
@@ -81,7 +81,7 @@ export const managerRows = [
     surname: "Çankaya",
     email: "berkin@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 3,
@@ -90,7 +90,7 @@ export const managerRows = [
     surname: "Can",
     email: "melihcan@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 4,
@@ -99,7 +99,7 @@ export const managerRows = [
     surname: "Ogutcen",
     email: "aliogutcen@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
   {
     id: 5,
@@ -109,6 +109,6 @@ export const managerRows = [
     surname: "Namsal",
     email: "mertnamsal@gmail.com",
     phone: 5555555555,
-    address: "izmit/kocaeli",
+    address: "Tüysüzler mahallesi Örnek Sokak No:2/2b",
   },
 ];

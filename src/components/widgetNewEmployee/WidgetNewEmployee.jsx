@@ -3,7 +3,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 const WidgetNewEmployee = () => {
   return (
     <div className="widgetNew">
-      <span className="widgetSmTitle"> New Join Member</span>
+      <span className="widgetSmTitle"> New Join Employee</span>
       <ul className="widgetSmList">
         <li className="widgetSmListItem">
           <img

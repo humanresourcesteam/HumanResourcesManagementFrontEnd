@@ -19,9 +19,6 @@ const Navbar = () => {
             English
           </div>
           <div className="item">
-            <DarkModeOutlinedIcon className="icon" />
-          </div>
-          <div className="item">
             <FullscreenOutlinedIcon className="icon" />
           </div>
 

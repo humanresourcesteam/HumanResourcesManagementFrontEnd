@@ -2,7 +2,6 @@ import "./sidebar.scss";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
@@ -10,31 +9,43 @@ import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutlinedSharp";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import { Link } from "react-router-dom";
+import Profile from "../../assets/profile.png";
 const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">HumanCo</span>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <span className="logo">HumanCo</span>
+        </Link>
       </div>
       <hr />
+
       <div className="center">
+        <div className="item">
+          <img src={Profile} className="avatar" />
+        </div>
         <ul>
           <p className="title">MAIN</p>
-          <li>
-            <DashboardOutlinedIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
-
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardOutlinedIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
           <p className="title">LIST</p>
-          <li>
-            <ManageAccountsOutlinedIcon className="icon" />
-            <span>Manager</span>
-          </li>
-          <li>
-            <BadgeOutlinedIcon className="icon" />
-            <span>Employee</span>
-          </li>
-
+          <Link to="/manager" style={{ textDecoration: "none" }}>
+            <li>
+              <ManageAccountsOutlinedIcon className="icon" />
+              <span>Manager</span>
+            </li>
+          </Link>
+          <Link to="/employee" style={{ textDecoration: "none" }}>
+            <li>
+              <BadgeOutlinedIcon className="icon" />
+              <span>Employee</span>
+            </li>
+          </Link>
           <p className="title">USEFUL</p>
           <li>
             <InsertChartOutlinedSharpIcon className="icon" />
@@ -69,11 +80,6 @@ const Sidebar = () => {
             <span>Logout</span>
           </li>
         </ul>
-      </div>
-
-      <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
       </div>
     </div>
   );

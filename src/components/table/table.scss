@@ -1,4 +1,5 @@
 .table {
+  flex: 6;
   .cellWrapper {
     .image {
       width: 32px;
@@ -7,4 +8,8 @@
       object-fit: cover;
     }
   }
+}
+
+.tableCell {
+  color: #1d3354;
 }

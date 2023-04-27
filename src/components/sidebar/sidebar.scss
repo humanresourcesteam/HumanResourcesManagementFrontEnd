@@ -1,8 +1,8 @@
 :root {
-  --first-color: #0b2447;
-  --second-color: #19376d;
-  --third-color: #576cbc;
-  --light-color: #a5d7e8;
+  --first-color: #b1b2ff;
+  --second-color: #aac4ff;
+  --third-color: #d2daff;
+  --light-color: #eef1ff;
 }
 .sidebar {
   flex: 1;
@@ -13,6 +13,7 @@
     height: 0;
     border: 0.5px solid rgb(233, 232, 232);
   }
+
   .top {
     height: 50px;
     display: flex;
@@ -20,43 +21,58 @@
     justify-content: center;
 
     .logo {
-      font-weight: bolder;
-      font-size: 28px;
-      color: var(-first-color);
+      font-weight: 800;
+      font-size: 32px;
+      color: #d64045;
       letter-spacing: 1px;
     }
   }
   .center {
+    display: flex;
+    flex-direction: column;
+    .avatar {
+      margin-top: 30px;
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      text-align: center;
+    }
+    .item {
+      text-align: center;
+    }
     padding-left: 10px;
     ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
       list-style: none;
       margin: 0;
       padding: 0;
 
       .title {
-        font-size: 12px;
-        font-weight: bold;
-        color: gray;
-        margin-top: 15px;
-        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1d3354;
+        margin-top: 20px;
+        margin-bottom: 10px;
       }
       li {
         display: flex;
         align-items: center;
         padding: 5px;
         cursor: pointer;
-
         &:hover {
-          background-color: #cff2fd65;
+          background-color: #e9fff9;
         }
         .icon {
-          font-size: 18px;
-          color: var(--second-color);
+          font-size: 20px;
+          color: #03045e;
         }
         span {
-          font-size: 14px;
-          font-weight: bold;
-          color: gray;
+          font-size: 16px;
+          font-weight: 600;
+          color: #467599;
           margin-left: 10px;
         }
       }

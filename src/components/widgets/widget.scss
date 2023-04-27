@@ -1,9 +1,3 @@
-:root {
-  --first-color: #0b2447;
-  --second-color: #19376d;
-  --third-color: #576cbc;
-  --light-color: #a5d7e8;
-}
 .widget {
   display: flex;
   justify-content: space-between;
@@ -20,12 +14,12 @@
     .title {
       font-weight: bold;
       font-size: 14px;
-      color: var(--second-color);
+      color: #d64045;
     }
     .counter {
       font-size: 28px;
       font-weight: 300;
-      color: var(--third-color);
+      color: #1d3354;
     }
     .link {
       width: max-content;

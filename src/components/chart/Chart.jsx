@@ -10,12 +10,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 const data = [
-  { name: "January", Total: 1200 },
-  { name: "February", Total: 2100 },
-  { name: "March", Total: 800 },
-  { name: "April", Total: 1600 },
-  { name: "May", Total: 900 },
-  { name: "June", Total: 1700 },
+  { name: "January", TotalEmployee: 1200 },
+  { name: "February", TotalEmployee: 2100 },
+  { name: "March", TotalEmployee: 800 },
+  { name: "April", TotalEmployee: 1600 },
+  { name: "May", TotalEmployee: 900 },
+  { name: "June", TotalEmployee: 1700 },
 ];
 const Chart = () => {
   return (
@@ -39,7 +39,7 @@ const Chart = () => {
           <Legend />
           <Line
             type="monotone"
-            dataKey="Total"
+            dataKey="TotalEmployee"
             stroke="#0b2447"
             activeDot={{ r: 8 }}
           />

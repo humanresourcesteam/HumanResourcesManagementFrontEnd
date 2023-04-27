@@ -30,12 +30,6 @@ const Datatable = () => {
                 <span>View</span>
               </Link>
             </div>
-            <div className="delete">
-              <DeleteOutlineOutlinedIcon
-                className="icon"
-                onClick={() => handleDelete(params.row.id)}
-              />
-            </div>
           </div>
         );
       },
@@ -44,12 +38,6 @@ const Datatable = () => {
 
   return (
     <div className="datatable">
-      <div className="dataTableTitle">
-        <Link to="/employee/new" className="link">
-          Add new manager
-        </Link>
-      </div>
-
       <DataGrid
         className="datagrid"
         rows={data}

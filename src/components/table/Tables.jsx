@@ -29,9 +29,9 @@ const List = () => {
     },
     {
       id: 3,
-      firtName: "Acer Nitro 5",
+      firtName: "Buse",
       img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-      surname: "John Smith",
+      surname: "can",
       email: "melihcan@gmail.com",
       phone: 5555555555,
       address: "izmit/kocaeli",
