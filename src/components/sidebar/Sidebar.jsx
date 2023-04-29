@@ -23,7 +23,9 @@ const Sidebar = () => {
 
       <div className="center">
         <div className="item">
-          <img src={Profile} className="avatar" />
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <img src={Profile} className="avatar" />
+          </Link>
         </div>
         <ul>
           <p className="title">MAIN</p>
@@ -71,10 +73,12 @@ const Sidebar = () => {
           </li>
 
           <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Profile</span>
+            </li>
+          </Link>
           <li>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>

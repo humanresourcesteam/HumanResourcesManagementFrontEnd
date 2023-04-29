@@ -5,6 +5,7 @@ import "./new.scss";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import { managerRows } from "../../datatablesource";
 import Table from "../../components/table/Tables";
+import FileBase64 from "react-file-base64";
 const New = () => {
   const [file, setFile] = useState("");
 
@@ -57,6 +58,13 @@ const New = () => {
                   setManager({ ...manager, image: e.target.files[0] })
                 }
                 style={{ display: "none" }}
+              />
+
+              <FileBase64
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setManager({ ...manager, image: base64 })
+                }
               />
             </div>
           </div>
