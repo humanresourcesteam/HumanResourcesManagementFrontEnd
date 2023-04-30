@@ -11,7 +11,31 @@ import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutline
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
 import Profile from "../../assets/profile.png";
+import AdminService from "../../service/AdminService";
+import { useEffect, useState } from "react";
 const Sidebar = () => {
+
+  
+  const [admin,setAdmin] = useState({});
+
+   
+
+  const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgyODMwNDQ4LCJpYXQiOjE2ODI3OTQ0NDh9.M8Ia5Ma3NsnThQIOD0hecTPwSGHVQIhlugfOigo7lhh-YiKHjRXMZgaDB3NBjnE04QJvIMnAn3yQvhd2-6owXg";
+  useEffect(() => {
+    AdminService.getAllAdminInfo(token).then((response)=> {
+      setAdmin((admin)=> ({
+        ...admin,
+        ...response.data
+        
+      })
+      
+
+      )
+    })
+  },[])
+
+  console.log(admin);
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -24,7 +48,7 @@ const Sidebar = () => {
       <div className="center">
         <div className="item">
           <Link to="/" style={{ textDecoration: "none" }}>
-            <img src={Profile} className="avatar" />
+            <img src={admin.image} className="avatar" />
           </Link>
         </div>
         <ul>
