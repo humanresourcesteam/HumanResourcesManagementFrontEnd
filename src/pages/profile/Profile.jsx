@@ -1,75 +1,131 @@
 import "./profile.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
+import AdminService from "../../service/AdminService";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import moment from "moment";
 
 const Profile = () => {
+  const token =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MywiZXhwIjoxNjgyODQ1NDA5LCJpYXQiOjE2ODI4MDk0MDl9.5EiA-3J3ivPZ3rBaxX56IceAHzkhzicqjTrGrdto931ibA1oYIgxqhNmNQ5gkAszbjTHSC3ykB_sautq2OEMrg";
+
+  const [admin, setAdmin] = useState({});
+
+  const [data, setData] = useState({
+    firstName: "",
+    surname: "",
+    email: "",
+    dateOfEmployment: "",
+    image: "",
+    token: token,
+  });
+
+  const [date, setDate] = useState("");
+
+  const [email, setEmail] = useState("");
+
+  const [firstName, setFirstName] = useState("");
+
+  const [surname, setSurname] = useState("");
+
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    AdminService.getAllAdminInfo(token).then((response) => {
+      setAdmin((admin) => ({
+        ...admin,
+        ...response.data,
+      }));
+      setDate(response.data.dateOfEmployment);
+      console.log(response.data.dateOfEmployment);
+      setEmail(response.data.email);
+      setFirstName(response.data.firstName);
+      setSurname(response.data.surname);
+      setImage(response.data.image);
+    });
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    AdminService.updateAdmin(data).then(()=>{
+      alert("gunclellem basarılı")
+    },()=>{
+      alert("başaramadık.")
+    })
+    console.log(data);
+  };
+
   return (
     <div className="single">
       <Sidebar />
       <div className="singleContainer">
         <Navbar />
         <div className="top">
-          <h2>Melihcan Öztürk</h2>
+          <h2>{admin.firstName + " " + admin.surname}</h2>
         </div>
         <div className="bottom">
-          <div className="bottom-top">
-            <img
-              src={
-                "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              className="image"
-            />
-          </div>
-          <div className="bottom-bot">
-            <div className="personal">
-              <div className="formInput">
-                <label>Email</label>
-                <input type="email" />
+          <form onSubmit={handleSubmit}>
+            <div className="bottom-top">
+              <img src={admin.image} className="image" />
+            </div>
+            <div className="bottom-bot">
+              <div className="personal">
+                <div className="formInput">
+                  <label>Email</label>
+                  <input
+                    type="email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    value={email}
+                  />
+                </div>
+                <div className="formInput">
+                  <label>Firstname</label>
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setFirstName(e.target.value);
+                    }}
+                    value={firstName}
+                  />
+                </div>
+                <div className="formInput">
+                  <label>Surname</label>
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setSurname(e.target.value);
+                    }}
+                    value={surname}
+                  />
+                </div>
               </div>
-              <div className="formInput">
-                <label>Firstname</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Second name</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Surname</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Second surname</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Birthday</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Birthday Place</label>
-                <input type="text" />
+              <div className="work">
+                <div className="formInput">
+                  <label>Date Of Employment</label>
+                  <input type="date" disabled value={date} />
+                </div>
+                <button
+                  type="submit"
+                  onClick={(e) => {
+                    setData({
+                      ...data,
+                      dateOfEmployment: date,
+                      email: email,
+                      surname: surname,
+                      firstName: firstName,
+                      image: image,
+                    });
+                  }}
+                >
+                  gönder lan
+                </button>
               </div>
             </div>
-            <div className="work">
-              <div className="formInput">
-                <label>Identification Number</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Phone</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Date Of Employment</label>
-                <input type="text" />
-              </div>
-              <div className="formInput">
-                <label>Address</label>
-                <input type="text" />
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

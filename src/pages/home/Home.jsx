@@ -7,7 +7,18 @@ import Chart from "../../components/chart/Chart";
 import Tables from "../../components/table/Tables";
 import Table from "../../components/table/Tables";
 import WidgetNewEmployee from "../../components/widgetNewEmployee/WidgetNewEmployee";
+import { useEffect, useState } from "react";
+import AdminService from "../../service/AdminService";
 const Home = () => {
+
+
+
+
+
+
+
+
+
   return (
     <div className="home">
       <Sidebar />
