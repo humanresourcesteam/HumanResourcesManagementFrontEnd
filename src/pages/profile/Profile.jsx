@@ -4,10 +4,11 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
+import Swal from 'sweetalert2'
 
 const Profile = () => {
   const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MywiZXhwIjoxNjgyODQ1NDA5LCJpYXQiOjE2ODI4MDk0MDl9.5EiA-3J3ivPZ3rBaxX56IceAHzkhzicqjTrGrdto931ibA1oYIgxqhNmNQ5gkAszbjTHSC3ykB_sautq2OEMrg";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6NCwiZXhwIjoxNjgyOTk1NjA0LCJpYXQiOjE2ODI5NTk2MDR9.ZJPlZWfwbWlt2JgmLpbVoatLJ5kfasqBfdUAJsEKmPvKp1lIz2ULwryvJxkNVLieJkkLjfMAR7AzDgLwBVKFwA";
 
   const [admin, setAdmin] = useState({});
 
@@ -33,9 +34,10 @@ const Profile = () => {
   const [newImage, setNewImage] = useState("");
   const onChangeImage = (e) => {
     const file = e.target.files[0];
+    setImage(file)
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      setNewImage(fileReader.result);
+      setNewImage(fileReader.result.split(",")[1]);
     };
     fileReader.readAsDataURL(file);
   };
@@ -51,23 +53,46 @@ const Profile = () => {
       setEmail(response.data.email);
       setFirstName(response.data.firstName);
       setSurname(response.data.surname);
-      setImage(response.data.image);
+      // setImage(response.data.image);
     });
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     AdminService.updateAdmin(data).then(
       () => {
-        alert("gunclellem basarılı");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully'
+        })
+        window.location.reload(true)
       },
       () => {
-        alert("başaramadık.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
       }
     );
-    console.log(data);
+    
   };
+
+
+  console.log(admin.firstName);
 
   return (
     <div className="single">
@@ -82,12 +107,11 @@ const Profile = () => {
             <div className="bottom-top">
               <img
                 src={
-                  newImage
-                    ? newImage
-                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                    image ? URL.createObjectURL(image)
+                    :"http://localhost:9091/images/"+admin.image
                 }
                 className="image"
-                tempImage={newImage}
+                
               />
             </div>
             <label htmlFor="file">
