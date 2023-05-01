@@ -14,27 +14,18 @@ import Profile from "../../assets/profile.png";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
 const Sidebar = () => {
+  const [admin, setAdmin] = useState({});
 
-  const [admin,setAdmin] = useState({});
-
-   
-
-  const token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6NCwiZXhwIjoxNjgyOTk1NjA0LCJpYXQiOjE2ODI5NTk2MDR9.ZJPlZWfwbWlt2JgmLpbVoatLJ5kfasqBfdUAJsEKmPvKp1lIz2ULwryvJxkNVLieJkkLjfMAR7AzDgLwBVKFwA";
+  const token =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDEwMjA5LCJpYXQiOjE2ODI5NzQyMDl9.RqKxqounelfP8ib-JCrTDjE4iFbmPkw5oETriLI7GZT8G1zwotpxtJ0o6ZNmArdbBzb2P-e3ec2XD3jRJNfFKw";
   useEffect(() => {
-    AdminService.getAllAdminInfo(token).then((response)=> {
-      setAdmin((admin)=> ({
+    AdminService.getAllAdminInfo(token).then((response) => {
+      setAdmin((admin) => ({
         ...admin,
-        ...response.data
-        
-      })
-      
-
-      )
-    })
-  },[])
-
-
- 
+        ...response.data,
+      }));
+    });
+  }, []);
 
   return (
     <div className="sidebar">
@@ -48,11 +39,14 @@ const Sidebar = () => {
       <div className="center">
         <div className="item">
           <Link to="/" style={{ textDecoration: "none" }}>
-            <img src={
-
-                    admin.image ?"http://localhost:9091/images/"+admin.image
-                    :"https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                } className="avatar" />
+            <img
+              src={
+                admin.image
+                  ? "http://localhost:9091/images/" + admin.image
+                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+              }
+              className="avatar"
+            />
           </Link>
         </div>
         <ul>

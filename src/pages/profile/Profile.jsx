@@ -4,11 +4,11 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const Profile = () => {
   const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6NCwiZXhwIjoxNjgyOTk1NjA0LCJpYXQiOjE2ODI5NTk2MDR9.ZJPlZWfwbWlt2JgmLpbVoatLJ5kfasqBfdUAJsEKmPvKp1lIz2ULwryvJxkNVLieJkkLjfMAR7AzDgLwBVKFwA";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDEwMjA5LCJpYXQiOjE2ODI5NzQyMDl9.RqKxqounelfP8ib-JCrTDjE4iFbmPkw5oETriLI7GZT8G1zwotpxtJ0o6ZNmArdbBzb2P-e3ec2XD3jRJNfFKw";
 
   const [admin, setAdmin] = useState({});
 
@@ -34,7 +34,7 @@ const Profile = () => {
   const [newImage, setNewImage] = useState("");
   const onChangeImage = (e) => {
     const file = e.target.files[0];
-    setImage(file)
+    setImage(file);
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setNewImage(fileReader.result.split(",")[1]);
@@ -59,40 +59,41 @@ const Profile = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log(data);
+    console.log(newImage);
     AdminService.updateAdmin(data).then(
       () => {
         const Toast = Swal.mixin({
           toast: true,
-          position: 'top-end',
+          position: "top-end",
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
           didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-        
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+
         Toast.fire({
-          icon: 'success',
-          title: 'Signed in successfully'
-        })
-        window.location.reload(true)
+          icon: "success",
+          title: "Signed in successfully",
+        });
+
+        setNewImage("NABER");
+        window.location.reload(true);
       },
       () => {
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-        })
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       }
     );
-    
   };
 
-
-  console.log(admin.firstName);
+  console.log(newImage);
 
   return (
     <div className="single">
@@ -107,11 +108,11 @@ const Profile = () => {
             <div className="bottom-top">
               <img
                 src={
-                    image ? URL.createObjectURL(image)
-                    :"http://localhost:9091/images/"+admin.image
+                  image
+                    ? URL.createObjectURL(image)
+                    : "http://localhost:9091/images/" + admin.image
                 }
                 className="image"
-                
               />
             </div>
             <label htmlFor="file">
@@ -162,19 +163,30 @@ const Profile = () => {
                   <input type="date" disabled value={date} />
                 </div>
                 <button
+                  className="button"
                   type="submit"
                   onClick={(e) => {
-                    setData({
-                      ...data,
-                      dateOfEmployment: date,
-                      email: email,
-                      surname: surname,
-                      firstName: firstName,
-                      image: newImage,
-                    });
+                    if (newImage != "") {
+                      setData({
+                        ...data,
+                        dateOfEmployment: date,
+                        email: email,
+                        surname: surname,
+                        firstName: firstName,
+                        image: newImage,
+                      });
+                    } else {
+                      setData({
+                        ...data,
+                        dateOfEmployment: date,
+                        email: email,
+                        surname: surname,
+                        firstName: firstName,
+                      });
+                    }
                   }}
                 >
-                  gönder lan
+                  SEND
                 </button>
               </div>
             </div>

@@ -46,6 +46,12 @@
 
     gap: 20px;
   }
+
+  .bottom-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .formInput {
@@ -70,4 +76,14 @@
 ::placeholder {
   color: black;
   font-weight: 600;
+}
+
+.button {
+  background-color: #a5d7e8;
+  line-height: 35px;
+  border: none;
+  &:hover {
+    transition: 1s ease-in-out;
+    background: #4f95da;
+  }
 }

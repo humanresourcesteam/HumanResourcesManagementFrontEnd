@@ -11,7 +11,7 @@ const Navbar = () => {
   const [admin, setAdmin] = useState({});
 
   const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6NCwiZXhwIjoxNjgyOTk1NjA0LCJpYXQiOjE2ODI5NTk2MDR9.ZJPlZWfwbWlt2JgmLpbVoatLJ5kfasqBfdUAJsEKmPvKp1lIz2ULwryvJxkNVLieJkkLjfMAR7AzDgLwBVKFwA";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDEwMjA5LCJpYXQiOjE2ODI5NzQyMDl9.RqKxqounelfP8ib-JCrTDjE4iFbmPkw5oETriLI7GZT8G1zwotpxtJ0o6ZNmArdbBzb2P-e3ec2XD3jRJNfFKw";
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
       setAdmin((admin) => ({
