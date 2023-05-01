@@ -79,11 +79,13 @@
 }
 
 .button {
-  background-color: #a5d7e8;
+  background-color: #4f95da;
   line-height: 35px;
   border: none;
+  color: white;
+  font-weight: 700;
   &:hover {
     transition: 1s ease-in-out;
-    background: #4f95da;
+    background: #0b2447;
   }
 }

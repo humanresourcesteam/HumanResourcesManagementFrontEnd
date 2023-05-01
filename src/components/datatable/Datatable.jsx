@@ -1,9 +1,10 @@
 import "./datatable.scss";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColumnHeaderFilterIconButton } from "@mui/x-data-grid";
 import { managerColumns, managerRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { Grid3x3Outlined, Grid3x3TwoTone } from "@mui/icons-material";
 
 const Datatable = () => {
   const [data, setData] = useState(managerRows);
@@ -27,7 +28,7 @@ const Datatable = () => {
                 to={"/manager/" + params.row.id}
                 style={{ textDecoration: "none" }}
               >
-                <span>View</span>
+                <span>View Profile</span>
               </Link>
             </div>
             <div className="delete">
@@ -51,11 +52,15 @@ const Datatable = () => {
       </div>
 
       <DataGrid
+        style={{ fontWeight: "700" }}
         className="datagrid"
         rows={data}
         columns={managerColumns.concat(actionColumn)}
         paginationModel={{ page: 0, pageSize: 10 }}
-        checkboxSelection
+        rowHeight={100}
+        autoHeight
+        autoPageSize
+        rowSpacingType="border"
       />
     </div>
   );

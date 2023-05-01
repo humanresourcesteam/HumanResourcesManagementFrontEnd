@@ -1,5 +1,5 @@
 export const managerColumns = [
-  { field: "id", headerName: "ID", width: 30 },
+  { field: "id", headerName: "ID", width: 80 },
   {
     field: "img",
     headerName: "Image",
@@ -7,7 +7,7 @@ export const managerColumns = [
     renderCell: (param) => {
       return (
         <div className="cellWithImg">
-          <img src={param.row.img} className="cellImg" />
+          <img src={param.row.img} className="cell" />
         </div>
       );
     },

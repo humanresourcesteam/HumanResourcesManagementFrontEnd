@@ -32,6 +32,8 @@ const Profile = () => {
   const [image, setImage] = useState("");
 
   const [newImage, setNewImage] = useState("");
+
+  const [role, setRole] = useState("");
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -54,6 +56,7 @@ const Profile = () => {
       setFirstName(response.data.firstName);
       setSurname(response.data.surname);
       // setImage(response.data.image);
+      setRole(response.data.role);
     });
   }, []);
 
@@ -162,32 +165,38 @@ const Profile = () => {
                   <label>Date Of Employment</label>
                   <input type="date" disabled value={date} />
                 </div>
-                <button
-                  className="button"
-                  type="submit"
-                  onClick={(e) => {
-                    if (newImage != "") {
-                      setData({
-                        ...data,
-                        dateOfEmployment: date,
-                        email: email,
-                        surname: surname,
-                        firstName: firstName,
-                        image: newImage,
-                      });
-                    } else {
-                      setData({
-                        ...data,
-                        dateOfEmployment: date,
-                        email: email,
-                        surname: surname,
-                        firstName: firstName,
-                      });
-                    }
-                  }}
-                >
-                  SEND
-                </button>
+                <div className="formInput">
+                  <label>Role</label>
+                  <input type="text" value={role} disabled />
+                </div>
+                <div className="formInput">
+                  <button
+                    className="button"
+                    type="submit"
+                    onClick={(e) => {
+                      if (newImage != "") {
+                        setData({
+                          ...data,
+                          dateOfEmployment: date,
+                          email: email,
+                          surname: surname,
+                          firstName: firstName,
+                          image: newImage,
+                        });
+                      } else {
+                        setData({
+                          ...data,
+                          dateOfEmployment: date,
+                          email: email,
+                          surname: surname,
+                          firstName: firstName,
+                        });
+                      }
+                    }}
+                  >
+                    SEND
+                  </button>
+                </div>
               </div>
             </div>
           </form>
