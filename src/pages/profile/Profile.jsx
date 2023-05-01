@@ -3,8 +3,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import moment from "moment";
+import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 
 const Profile = () => {
   const token =
@@ -31,6 +30,16 @@ const Profile = () => {
 
   const [image, setImage] = useState("");
 
+  const [newImage, setNewImage] = useState("");
+  const onChangeImage = (e) => {
+    const file = e.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setNewImage(fileReader.result);
+    };
+    fileReader.readAsDataURL(file);
+  };
+
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
       setAdmin((admin) => ({
@@ -49,11 +58,14 @@ const Profile = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    AdminService.updateAdmin(data).then(()=>{
-      alert("gunclellem basarılı")
-    },()=>{
-      alert("başaramadık.")
-    })
+    AdminService.updateAdmin(data).then(
+      () => {
+        alert("gunclellem basarılı");
+      },
+      () => {
+        alert("başaramadık.");
+      }
+    );
     console.log(data);
   };
 
@@ -68,8 +80,25 @@ const Profile = () => {
         <div className="bottom">
           <form onSubmit={handleSubmit}>
             <div className="bottom-top">
-              <img src={admin.image} className="image" />
+              <img
+                src={
+                  newImage
+                    ? newImage
+                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                }
+                className="image"
+                tempImage={newImage}
+              />
             </div>
+            <label htmlFor="file">
+              <DriveFolderUploadIcon className="icon" />
+            </label>
+            <input
+              type="file"
+              id="file"
+              onChange={onChangeImage}
+              style={{ display: "none" }}
+            />
             <div className="bottom-bot">
               <div className="personal">
                 <div className="formInput">
@@ -117,7 +146,7 @@ const Profile = () => {
                       email: email,
                       surname: surname,
                       firstName: firstName,
-                      image: image,
+                      image: newImage,
                     });
                   }}
                 >
