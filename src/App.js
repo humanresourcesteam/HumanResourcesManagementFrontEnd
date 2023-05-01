@@ -8,7 +8,9 @@ import New from "./pages/new/New";
 import "./style/darkmode.scss";
 import ListEmployee from "./pages/listEmployee/ListEmployee";
 import Profile from "./pages/profile/Profile";
+
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>
