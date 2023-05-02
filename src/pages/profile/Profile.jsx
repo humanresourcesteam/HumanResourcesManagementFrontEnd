@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 
 const Profile = () => {
   const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDEwMjA5LCJpYXQiOjE2ODI5NzQyMDl9.RqKxqounelfP8ib-JCrTDjE4iFbmPkw5oETriLI7GZT8G1zwotpxtJ0o6ZNmArdbBzb2P-e3ec2XD3jRJNfFKw";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDU4MDUyLCJpYXQiOjE2ODMwMjIwNTJ9.VETENiQ8XyFwMbKjHOBuwltry2qao8pT5yFWpfpXa2bGrcT0vSVDyrSs53UZBNKRenvns9AtiyNphRkBOLWj1A";
 
   const [admin, setAdmin] = useState({});
 

@@ -13,11 +13,11 @@ import { Link } from "react-router-dom";
 import Profile from "../../assets/profile.png";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 const Sidebar = () => {
   const [admin, setAdmin] = useState({});
 
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDEwMjA5LCJpYXQiOjE2ODI5NzQyMDl9.RqKxqounelfP8ib-JCrTDjE4iFbmPkw5oETriLI7GZT8G1zwotpxtJ0o6ZNmArdbBzb2P-e3ec2XD3jRJNfFKw";
+  const token = Cookies.get("token");
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
       setAdmin((admin) => ({

@@ -1,0 +1,64 @@
+:root {
+  --first-color: #0b2447;
+  --second-color: #19376d;
+  --third-color: #576cbc;
+  --light-color: #a5d7e8;
+}
+
+.login {
+  display: flex;
+
+  justify-content: space-around;
+
+  .left {
+    img {
+      width: 100vh;
+    }
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      .title {
+        font-weight: bolder;
+        color: rgb(8, 192, 8);
+      }
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      input {
+        line-height: 35px;
+        width: 400px;
+        border: 0.5px solid gray;
+        text-align: center;
+        background-color: transparent;
+        &::placeholder {
+          color: gray;
+          font-weight: 600;
+        }
+      }
+
+      button {
+        background-color: rgb(8, 192, 8);
+        color: white;
+        border: none;
+        font-weight: 700;
+        line-height: 35px;
+      }
+    }
+  }
+}
