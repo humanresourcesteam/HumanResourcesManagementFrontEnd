@@ -5,10 +5,10 @@ import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 const Profile = () => {
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDU4MDUyLCJpYXQiOjE2ODMwMjIwNTJ9.VETENiQ8XyFwMbKjHOBuwltry2qao8pT5yFWpfpXa2bGrcT0vSVDyrSs53UZBNKRenvns9AtiyNphRkBOLWj1A";
+  const token = Cookies.get("token");
 
   const [admin, setAdmin] = useState({});
 

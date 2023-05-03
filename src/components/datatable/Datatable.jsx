@@ -56,11 +56,15 @@ const Datatable = () => {
         className="datagrid"
         rows={data}
         columns={managerColumns.concat(actionColumn)}
-        paginationModel={{ page: 0, pageSize: 10 }}
         rowHeight={100}
-        autoHeight
-        autoPageSize
-        rowSpacingType="border"
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 10,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
       />
     </div>
   );

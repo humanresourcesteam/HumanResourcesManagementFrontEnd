@@ -32,19 +32,43 @@ const Login = () => {
         <div className="top">
           <h1 className="title">HumanCo Login</h1>
         </div>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <input
-            className="email-input"
-            type="email"
-            placeholder="admin@example.com"
-            onChange={(e) => setAdmin({ ...admin, email: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            onChange={(e) => setAdmin({ ...admin, password: e.target.value })}
-          />
-          <button type="submit">Login</button>
+        <form className="form__content" onSubmit={handleSubmit}>
+          <div className="form__box">
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Enter Email"
+              onChange={(e) => {
+                {
+                  setAdmin({ ...admin, email: e.target.value });
+                }
+              }}
+            />
+            <label htmlFor="" className="form__label">
+              ENTER EMAIL
+            </label>
+            <div className="form__shadow"></div>
+          </div>
+          <div className="form__box">
+            <input
+              type="password"
+              className="form__input"
+              placeholder="Enter password"
+              onChange={(e) => {
+                {
+                  setAdmin({ ...admin, password: e.target.value });
+                }
+              }}
+            />
+            <label htmlFor="" className="form__label">
+              ENTER PASSWORD
+            </label>
+            <div className="form__shadow"></div>
+          </div>
+
+          <div className="form__button">
+            <input type="submit" className="form__submit" value="Sign-In" />
+          </div>
         </form>
       </div>
     </div>

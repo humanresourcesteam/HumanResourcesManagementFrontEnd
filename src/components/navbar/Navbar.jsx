@@ -4,14 +4,14 @@ import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenOutlinedIcon from "@mui/icons-material/FullscreenOutlined";
 import { Link } from "react-router-dom";
-import Profile from "../../assets/profile.png";
+
 import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 const Navbar = () => {
   const [admin, setAdmin] = useState({});
 
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJiaWxnZWFkYW0iLCJpZCI6MSwiZXhwIjoxNjgzMDU4MDUyLCJpYXQiOjE2ODMwMjIwNTJ9.VETENiQ8XyFwMbKjHOBuwltry2qao8pT5yFWpfpXa2bGrcT0vSVDyrSs53UZBNKRenvns9AtiyNphRkBOLWj1A";
+  const token = Cookies.get("token");
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
       setAdmin((admin) => ({

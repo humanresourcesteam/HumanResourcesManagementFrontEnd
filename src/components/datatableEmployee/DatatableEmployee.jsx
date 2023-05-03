@@ -42,7 +42,14 @@ const Datatable = () => {
         className="datagrid"
         rows={data}
         columns={managerColumns.concat(actionColumn)}
-        paginationModel={{ page: 0, pageSize: 10 }}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
         checkboxSelection
       />
     </div>
