@@ -34,6 +34,7 @@ const Profile = () => {
   const [newImage, setNewImage] = useState("");
 
   const [role, setRole] = useState("");
+
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -63,7 +64,7 @@ const Profile = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(data);
-    console.log(newImage);
+
     AdminService.updateAdmin(data).then(
       () => {
         const Toast = Swal.mixin({
@@ -83,7 +84,6 @@ const Profile = () => {
           title: "Signed in successfully",
         });
 
-        setNewImage("NABER");
         window.location.reload(true);
       },
       () => {
@@ -96,7 +96,7 @@ const Profile = () => {
     );
   };
 
-  console.log(newImage);
+  const APP_KEY = "	klfx6ixtvzrzm3h";
 
   return (
     <div className="single">
@@ -127,6 +127,7 @@ const Profile = () => {
               onChange={onChangeImage}
               style={{ display: "none" }}
             />
+
             <div className="bottom-bot">
               <div className="personal">
                 <div className="formInput">

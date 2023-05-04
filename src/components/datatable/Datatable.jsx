@@ -1,18 +1,39 @@
 import "./datatable.scss";
 import { DataGrid, GridColumnHeaderFilterIconButton } from "@mui/x-data-grid";
-import { managerColumns, managerRows } from "../../datatablesource";
+import { managerColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { Grid3x3Outlined, Grid3x3TwoTone } from "@mui/icons-material";
+import { useEffect } from "react";
+import ManagerService from "../../service/ManagerService";
 
 const Datatable = () => {
-  const [data, setData] = useState(managerRows);
+  const [manager, setManager] = useState([
+    {
+      id: "",
+      firtName: "",
+      img: "",
+      surname: "",
+      email: "",
+      phone: "",
+      address: "",
+    },
+  ]);
 
   // AXIOS ILE SILME IŞLEMİ YAPILIRKEN BURASI DÜZENLENECEK
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    setManager(manager.filter((item) => item.id !== id));
   };
+
+  useEffect(() => {
+    console.log("useEffect runs");
+    ManagerService.getAllAdminSummaryInfo().then((response) => {
+      setManager([...response.data]);
+    });
+    return () => {
+      console.log("useEffect clean-up");
+    };
+  }, []);
 
   const actionColumn = [
     {
@@ -50,11 +71,10 @@ const Datatable = () => {
           Add new manager
         </Link>
       </div>
-
       <DataGrid
         style={{ fontWeight: "700" }}
         className="datagrid"
-        rows={data}
+        rows={manager}
         columns={managerColumns.concat(actionColumn)}
         rowHeight={100}
         initialState={{

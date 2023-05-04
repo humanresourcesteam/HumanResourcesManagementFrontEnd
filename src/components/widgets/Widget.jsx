@@ -4,15 +4,37 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import AccessibilityNewOutlinedIcon from "@mui/icons-material/AccessibilityNewOutlined";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import AdminService from "../../service/AdminService";
+import ManagerService from "../../service/ManagerService";
 const Widget = ({ type }) => {
   let data;
-  const amount = 100;
+  const token = Cookies.get("token");
+
+  // total number of admin
+  const [adminCount, setAdminCount] = useState(0);
+  const [managerCount, setManagerCount] = useState(0);
+
+  useEffect(() => {
+    AdminService.getAllAdminCount(token).then((response) => {
+      setAdminCount(response.data.length);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("useEffect runs");
+    ManagerService.getAllAdminSummaryInfo().then((response) => {
+      setManagerCount(response.data.length);
+    });
+  }, []);
 
   switch (type) {
     case "manager":
       data = {
         title: "MANAGER",
         link: "See all manager",
+        count: managerCount,
         icon: (
           <ManageAccountsOutlinedIcon
             className="icon"
@@ -25,6 +47,7 @@ const Widget = ({ type }) => {
       data = {
         title: "EMPLOYEE",
         link: "See all employee",
+        count: 0,
         icon: (
           <BadgeOutlinedIcon
             className="icon"
@@ -38,8 +61,9 @@ const Widget = ({ type }) => {
       break;
     case "total":
       data = {
-        title: "TOTAL EMPLOYEE",
-        link: "See all total employee",
+        title: "TOTAL ADMIN",
+        link: "See all total admin",
+        count: adminCount,
         icon: (
           <AccessibilityNewOutlinedIcon
             className="icon"
@@ -56,7 +80,7 @@ const Widget = ({ type }) => {
     <div className="widget">
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">{amount}</span>
+        <span className="counter">{data.count}</span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">

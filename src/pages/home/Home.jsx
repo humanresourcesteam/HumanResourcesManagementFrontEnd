@@ -9,14 +9,8 @@ import Table from "../../components/table/Tables";
 import WidgetNewEmployee from "../../components/widgetNewEmployee/WidgetNewEmployee";
 import { useEffect, useState } from "react";
 import AdminService from "../../service/AdminService";
+import Cookies from "js-cookie";
 const Home = () => {
-
-
-
-
-
-
-
   return (
     <div className="home">
       <Sidebar />

@@ -1,18 +1,18 @@
 export const managerColumns = [
-  { field: "id", headerName: "ID", width: 80 },
+  { field: "id", headerName: "ID", width: 250 },
   {
-    field: "img",
+    field: "image",
     headerName: "Image",
-    width: 100,
+    width: 150,
     renderCell: (param) => {
       return (
         <div className="cellWithImg">
-          <img src={param.row.img} className="cell" />
+          <img src={param.row.image} className="cell" />
         </div>
       );
     },
   },
-  { field: "firtName", headerName: "Firstname", width: 200 },
+  { field: "firstName", headerName: "Firstname", width: 200 },
   { field: "surname", headerName: "Surname", width: 200 },
   { field: "phone", headerName: "Phone", width: 200 },
   { field: "email", headerName: "Email", width: 200 },
