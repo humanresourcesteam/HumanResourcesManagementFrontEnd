@@ -13,7 +13,11 @@ class AdminService {
   }
 
   updateAdmin(data) {
-    return axios.put(UPDATE_ADMIN, data, {});
+    return axios.post(UPDATE_ADMIN, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+    });
   }
 
   getAllAdminCount(token) {

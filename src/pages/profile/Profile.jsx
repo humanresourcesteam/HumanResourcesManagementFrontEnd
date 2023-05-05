@@ -16,7 +16,7 @@ const Profile = () => {
     firstName: "",
     surname: "",
     email: "",
-    dateOfEmployment: "",
+ //   dateOfEmployment: "",
     image: "",
     token: token,
   });
@@ -38,11 +38,6 @@ const Profile = () => {
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setNewImage(fileReader.result.split(",")[1]);
-    };
-    fileReader.readAsDataURL(file);
   };
 
   useEffect(() => {
@@ -96,7 +91,7 @@ const Profile = () => {
     );
   };
 
-  const APP_KEY = "	klfx6ixtvzrzm3h";
+  // const APP_KEY = "	klfx6ixtvzrzm3h";
 
   return (
     <div className="single">
@@ -113,7 +108,7 @@ const Profile = () => {
                 src={
                   image
                     ? URL.createObjectURL(image)
-                    : "http://localhost:9091/images/" + admin.image
+                    : admin.image
                 }
                 className="image"
               />
@@ -175,19 +170,19 @@ const Profile = () => {
                     className="button"
                     type="submit"
                     onClick={(e) => {
-                      if (newImage != "") {
+                      if (image != "") {
                         setData({
                           ...data,
-                          dateOfEmployment: date,
+                        //  dateOfEmployment: date,
                           email: email,
                           surname: surname,
                           firstName: firstName,
-                          image: newImage,
+                          image: image,
                         });
                       } else {
                         setData({
                           ...data,
-                          dateOfEmployment: date,
+                      //    dateOfEmployment: date,
                           email: email,
                           surname: surname,
                           firstName: firstName,
