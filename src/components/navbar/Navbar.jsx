@@ -45,7 +45,7 @@ const Navbar = () => {
               <img
                 src={
                   admin.image
-                    ? "http://localhost:9091/images/" + admin.image
+                    ? admin.image
                     : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
                 }
                 className="avatar"

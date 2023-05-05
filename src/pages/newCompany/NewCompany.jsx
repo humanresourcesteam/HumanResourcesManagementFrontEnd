@@ -12,6 +12,7 @@ const NewCompany = () => {
   const token = Cookies.get("token");
   const [selectedOption, setSelectedOption] = useState(null);
   const [newImage, setNewImage] = useState("");
+  const [date, setDate] = useState("");
   const [company, setCompany] = useState({
     token: token,
     name: "",
@@ -62,11 +63,10 @@ const NewCompany = () => {
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setNewImage(fileReader.result.split(",")[1]);
-    };
-    fileReader.readAsDataURL(file);
+  };
+  const handleDate = (e) => {
+    const date = e.target.value;
+    setDate(date);
   };
 
   const [isClearable, setIsClearable] = useState(true);
@@ -202,7 +202,9 @@ const NewCompany = () => {
                       onChange={(e) =>
                         setCompany({
                           ...company,
-                          yearOfEstablishment: e.target.value,
+                          yearOfEstablishment: new Date(e.target.value)
+                            .toISOString()
+                            .substring(0, 10),
                         })
                       }
                     />
@@ -214,7 +216,9 @@ const NewCompany = () => {
                       onChange={(e) =>
                         setCompany({
                           ...company,
-                          contractStartYear: e.target.value,
+                          contractStartYear: new Date(e.target.value)
+                            .toISOString()
+                            .substring(0, 10),
                         })
                       }
                     />
@@ -226,7 +230,9 @@ const NewCompany = () => {
                       onChange={(e) =>
                         setCompany({
                           ...company,
-                          contractEndYear: e.target.value,
+                          contractEndYear: new Date(e.target.value)
+                            .toISOString()
+                            .substring(0, 10),
                         })
                       }
                     />
@@ -260,7 +266,7 @@ const NewCompany = () => {
                   <div className="formInput">
                     <label>Number of Employees</label>
                     <input
-                      type="number"
+                      type="text"
                       onChange={(e) =>
                         console.log(
                           setCompany({
@@ -275,11 +281,10 @@ const NewCompany = () => {
               </div>
               <button
                 onClick={(e) => {
-                  if (newImage != "") {
+                  if (image != "") {
                     setCompany({
                       ...company,
-
-                      image: newImage,
+                      image: image,
                     });
                   }
                 }}

@@ -16,7 +16,7 @@ const Profile = () => {
     firstName: "",
     surname: "",
     email: "",
- //   dateOfEmployment: "",
+    // dateOfEmployment: "",
     image: "",
     token: token,
   });
@@ -105,11 +105,7 @@ const Profile = () => {
           <form onSubmit={handleSubmit}>
             <div className="bottom-top">
               <img
-                src={
-                  image
-                    ? URL.createObjectURL(image)
-                    : admin.image
-                }
+                src={image ? URL.createObjectURL(image) : admin.image}
                 className="image"
               />
             </div>
@@ -173,7 +169,7 @@ const Profile = () => {
                       if (image != "") {
                         setData({
                           ...data,
-                        //  dateOfEmployment: date,
+                          //  dateOfEmployment: date,
                           email: email,
                           surname: surname,
                           firstName: firstName,
@@ -182,10 +178,11 @@ const Profile = () => {
                       } else {
                         setData({
                           ...data,
-                      //    dateOfEmployment: date,
+                          //    dateOfEmployment: date,
                           email: email,
                           surname: surname,
                           firstName: firstName,
+                          image: null,
                         });
                       }
                     }}
