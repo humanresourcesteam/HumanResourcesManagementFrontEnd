@@ -15,6 +15,7 @@ import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Logout from "../logout/Logout";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 const Sidebar = () => {
   const [admin, setAdmin] = useState({});
 
@@ -65,12 +66,18 @@ const Sidebar = () => {
               <span>Manager</span>
             </li>
           </Link>
-          {/* <Link to="/employee" style={{ textDecoration: "none" }}>
+          <Link to="/employee" style={{ textDecoration: "none" }}>
             <li>
               <BadgeOutlinedIcon className="icon" />
               <span>Employee</span>
             </li>
-          </Link> */}
+          </Link>
+          <Link to="/company" style={{ textDecoration: "none" }}>
+            <li>
+              <ApartmentIcon className="icon" />
+              <span>Company</span>
+            </li>
+          </Link>
           <p className="title">USEFUL</p>
           <li>
             <InsertChartOutlinedSharpIcon className="icon" />

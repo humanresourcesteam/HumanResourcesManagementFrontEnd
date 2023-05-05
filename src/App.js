@@ -8,6 +8,8 @@ import New from "./pages/new/New";
 import "./style/darkmode.scss";
 import ListEmployee from "./pages/listEmployee/ListEmployee";
 import Profile from "./pages/profile/Profile";
+import ListCompany from "./pages/listCompany/ListCompany";
+import NewCompany from "./pages/newCompany/NewCompany";
 
 function App() {
   return (
@@ -25,7 +27,11 @@ function App() {
             <Route path="employee">
               <Route index element={<ListEmployee />} />
               <Route path=":employeeId" element={<Single />} />
-              <Route path="new" element={<New />} />
+            </Route>
+            <Route path="company">
+              <Route index element={<ListCompany />} />
+              <Route path=":companyId" element={<Single />} />
+              <Route path="new" element={<NewCompany />} />
             </Route>
             <Route path="profile">
               <Route index element={<Profile />} />
