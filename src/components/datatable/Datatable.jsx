@@ -12,7 +12,7 @@ const Datatable = () => {
     {
       id: "",
       firtName: "",
-      img: "",
+      image: "",
       surname: "",
       email: "",
       phone: "",
@@ -52,12 +52,12 @@ const Datatable = () => {
                 <span>View Profile</span>
               </Link>
             </div>
-            <div className="delete">
+            {/* <div className="delete">
               <DeleteOutlineOutlinedIcon
                 className="icon"
                 onClick={() => handleDelete(params.row.id)}
               />
-            </div>
+            </div> */}
           </div>
         );
       },
@@ -67,7 +67,7 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="dataTableTitle">
-        <Link to="/employee/new" className="link">
+        <Link to="/manager/new" className="link">
           Add new manager
         </Link>
       </div>
@@ -77,13 +77,6 @@ const Datatable = () => {
         rows={manager}
         columns={managerColumns.concat(actionColumn)}
         rowHeight={100}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
-          },
-        }}
         pageSizeOptions={[5]}
       />
     </div>

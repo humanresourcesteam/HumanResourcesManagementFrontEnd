@@ -7,7 +7,10 @@ export const managerColumns = [
     renderCell: (param) => {
       return (
         <div className="cellWithImg">
-          <img src={param.row.image} className="cell" />
+          <img
+            src={"http://localhost:9092/images/" + param.row.image}
+            className="cell"
+          />
         </div>
       );
     },

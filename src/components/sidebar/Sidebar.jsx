@@ -14,6 +14,7 @@ import Profile from "../../assets/profile.png";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import Logout from "../logout/Logout";
 const Sidebar = () => {
   const [admin, setAdmin] = useState({});
 
@@ -64,12 +65,12 @@ const Sidebar = () => {
               <span>Manager</span>
             </li>
           </Link>
-          <Link to="/employee" style={{ textDecoration: "none" }}>
+          {/* <Link to="/employee" style={{ textDecoration: "none" }}>
             <li>
               <BadgeOutlinedIcon className="icon" />
               <span>Employee</span>
             </li>
-          </Link>
+          </Link> */}
           <p className="title">USEFUL</p>
           <li>
             <InsertChartOutlinedSharpIcon className="icon" />
@@ -103,7 +104,7 @@ const Sidebar = () => {
           </Link>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <Logout />
           </li>
         </ul>
       </div>

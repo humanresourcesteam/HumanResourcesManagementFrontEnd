@@ -13,7 +13,7 @@ class AdminService {
   }
 
   updateAdmin(data) {
-    return axios.put(UPDATE_ADMIN, data);
+    return axios.put(UPDATE_ADMIN, data, {});
   }
 
   getAllAdminCount(token) {

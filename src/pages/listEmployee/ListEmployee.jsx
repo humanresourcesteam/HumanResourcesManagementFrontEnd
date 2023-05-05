@@ -2,6 +2,7 @@ import "./list.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DatatableEmployee from "../../components/datatableEmployee/DatatableEmployee";
+import withAuth from "../../withAuth";
 const ListEmployee = () => {
   return (
     <div className="list">
@@ -14,4 +15,4 @@ const ListEmployee = () => {
   );
 };
 
-export default ListEmployee;
+export default withAuth(ListEmployee);

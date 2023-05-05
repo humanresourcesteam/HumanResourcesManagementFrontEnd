@@ -6,20 +6,24 @@ import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import { managerRows } from "../../datatablesource";
 import Table from "../../components/table/Tables";
 import FileBase64 from "react-file-base64";
-const New = () => {
-  const [file, setFile] = useState("");
+import withAuth from "../../withAuth";
+import ManagerService from "../../service/ManagerService";
 
+const New = () => {
+  const [image, setImage] = useState("");
+
+  const [newImage, setNewImage] = useState("");
   const [manager, setManager] = useState({
-    id: "21212",
     email: "",
     firstName: "",
     surname: "",
-    birthdate: "",
+    birthDate: "",
     address: "",
     phone: "",
-    placeOfBirth: "",
+    birthdayPlace: "",
     image: "",
     identificationNumber: "",
+    dateOfEmployment: "",
   });
 
   const [array, setArray] = useState({});
@@ -27,6 +31,26 @@ const New = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(manager);
+
+    ManagerService.addManager(manager).then(
+      () => {
+        alert("başarılı");
+        window.location.reload(true);
+      },
+      () => {
+        alert("başarısız");
+      }
+    );
+  };
+
+  const onChangeImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setNewImage(fileReader.result.split(",")[1]);
+    };
+    fileReader.readAsDataURL(file);
   };
 
   return (
@@ -41,8 +65,8 @@ const New = () => {
           <div className="left">
             <img
               src={
-                manager.image
-                  ? URL.createObjectURL(manager.image)
+                image
+                  ? URL.createObjectURL(image)
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               className="image"
@@ -54,17 +78,8 @@ const New = () => {
               <input
                 type="file"
                 id="file"
-                onChange={(e) =>
-                  setManager({ ...manager, image: e.target.files[0] })
-                }
+                onChange={onChangeImage}
                 style={{ display: "none" }}
-              />
-
-              <FileBase64
-                multiple={false}
-                onDone={({ base64 }) =>
-                  setManager({ ...manager, image: base64 })
-                }
               />
             </div>
           </div>
@@ -74,7 +89,6 @@ const New = () => {
                 <label>Email</label>
                 <input
                   type="email"
-                  placeholder="example@gmail.com"
                   onChange={(e) =>
                     setManager({ ...manager, email: e.target.value })
                   }
@@ -84,7 +98,6 @@ const New = () => {
                 <label>Firstname</label>
                 <input
                   type="text"
-                  placeholder="John"
                   onChange={(e) =>
                     setManager({ ...manager, firstName: e.target.value })
                   }
@@ -105,7 +118,16 @@ const New = () => {
                 <input
                   type="date"
                   onChange={(e) =>
-                    setManager({ ...manager, birthdate: e.target.value })
+                    setManager({ ...manager, birthDate: e.target.value })
+                  }
+                />
+              </div>
+              <div className="formInput">
+                <label>Date Of Employment</label>
+                <input
+                  type="date"
+                  onChange={(e) =>
+                    setManager({ ...manager, dateOfEmployment: e.target.value })
                   }
                 />
               </div>
@@ -115,7 +137,7 @@ const New = () => {
                   type="text"
                   placeholder="Istanbul"
                   onChange={(e) =>
-                    setManager({ ...manager, placeOfBirth: e.target.value })
+                    setManager({ ...manager, birthdayPlace: e.target.value })
                   }
                 />
               </div>
@@ -150,7 +172,20 @@ const New = () => {
                 />
               </div>
 
-              <button type="submit">Send</button>
+              <button
+                onClick={(e) => {
+                  if (newImage != "") {
+                    setManager({
+                      ...manager,
+
+                      image: newImage,
+                    });
+                  }
+                }}
+                type="submit"
+              >
+                Send
+              </button>
             </form>
           </div>
         </div>
@@ -159,4 +194,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default withAuth(New);

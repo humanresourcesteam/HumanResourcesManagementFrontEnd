@@ -4,6 +4,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ManagerService from "../../service/ManagerService";
+import withAuth from "../../withAuth";
 const Single = () => {
   let params = useParams();
 
@@ -29,7 +30,7 @@ const Single = () => {
             <img
               src={
                 manager.image
-                  ? manager.image
+                  ? "http://localhost:9092/images/" + manager.image
                   : "https://images.unsplash.com/photo-1683097504876-42a726767b16?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80"
               }
               className="image"
@@ -86,4 +87,4 @@ const Single = () => {
   );
 };
 
-export default Single;
+export default withAuth(Single);

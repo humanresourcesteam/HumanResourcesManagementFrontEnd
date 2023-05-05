@@ -10,6 +10,7 @@ import WidgetNewEmployee from "../../components/widgetNewEmployee/WidgetNewEmplo
 import { useEffect, useState } from "react";
 import AdminService from "../../service/AdminService";
 import Cookies from "js-cookie";
+import withAuth from "../../withAuth";
 const Home = () => {
   return (
     <div className="home">
@@ -37,4 +38,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);

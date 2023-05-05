@@ -3,6 +3,7 @@ import Bro from "../../assets/bro.svg";
 import AuthService from "../../service/AuthService";
 import { useState } from "react";
 import Cookies from "js-cookie";
+
 const Login = () => {
   const [admin, setAdmin] = useState({
     email: "",
@@ -15,6 +16,7 @@ const Login = () => {
       (response) => {
         console.log(response.data.token);
         Cookies.set("token", response.data.token);
+
         window.location.replace("/");
       },
       () => {
