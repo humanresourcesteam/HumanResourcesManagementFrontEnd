@@ -3,7 +3,6 @@ import { DataGrid, GridColumnHeaderFilterIconButton } from "@mui/x-data-grid";
 import { managerColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useEffect } from "react";
 import ManagerService from "../../service/ManagerService";
 

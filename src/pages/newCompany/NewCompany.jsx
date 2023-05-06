@@ -47,6 +47,8 @@ const NewCompany = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(company);
+    const date = new Date(company.contractStartYear);
+    console.log(date);
 
     CompanyService.addCompany(company).then(
       () => {

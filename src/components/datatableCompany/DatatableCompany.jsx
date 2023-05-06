@@ -1,17 +1,43 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { managerColumns, managerRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { useState, useEffect } from "react";
+import CompanyService from "../../service/CompanyService";
 
 const Datatable = () => {
-  const [data, setData] = useState(managerRows);
+  // // AXIOS ILE SILME IŞLEMİ YAPILIRKEN BURASI DÜZENLENECEK
+  // const handleDelete = (id) => {
+  //   setData(data.filter((item) => item.id !== id));
+  // };
 
-  // AXIOS ILE SILME IŞLEMİ YAPILIRKEN BURASI DÜZENLENECEK
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  const managerColumns = [
+    { field: "id", headerName: "ID", width: 250 },
+    { field: "name", headerName: "Company Name", width: 300 },
+    { field: "title", headerName: "Title", width: 200 },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "address", headerName: "Address", width: 200 },
+    { field: "phone", headerName: "Phone", width: 350 },
+  ];
+
+  const [company, setCompany] = useState([
+    {
+      id: "",
+      name: "",
+      title: "",
+      email: "",
+      address: "",
+      phone: "",
+    },
+  ]);
+
+  useEffect(() => {
+    CompanyService.getSummaryAllCompany().then((response) => {
+      setCompany([...response.data]);
+    });
+    return () => {
+      console.log("useEffect clean-up");
+    };
+  }, []);
 
   const actionColumn = [
     {
@@ -24,7 +50,7 @@ const Datatable = () => {
             <div className="view">
               <Link
                 className="links"
-                to={"/manager/" + params.row.id}
+                to={"/company/" + params.row.id}
                 style={{ textDecoration: "none" }}
               >
                 <span>View</span>
@@ -38,19 +64,16 @@ const Datatable = () => {
 
   return (
     <div className="datatable">
+      <div className="dataTableTitle">
+        <Link to="/company/new" className="link">
+          Add new Company
+        </Link>
+      </div>
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={company}
         columns={managerColumns.concat(actionColumn)}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
-        }}
         pageSizeOptions={[5]}
-        checkboxSelection
       />
     </div>
   );

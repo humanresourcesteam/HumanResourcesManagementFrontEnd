@@ -10,7 +10,8 @@ import ListEmployee from "./pages/listEmployee/ListEmployee";
 import Profile from "./pages/profile/Profile";
 import ListCompany from "./pages/listCompany/ListCompany";
 import NewCompany from "./pages/newCompany/NewCompany";
-
+import SingleCompany from "./pages/singlecompany/SingleCompany";
+import "mapbox-gl/dist/mapbox-gl.css";
 function App() {
   return (
     <div className="App">
@@ -30,7 +31,7 @@ function App() {
             </Route>
             <Route path="company">
               <Route index element={<ListCompany />} />
-              <Route path=":companyId" element={<Single />} />
+              <Route path=":companyId" element={<SingleCompany />} />
               <Route path="new" element={<NewCompany />} />
             </Route>
             <Route path="profile">

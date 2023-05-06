@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ManagerService from "../../service/ManagerService";
 import withAuth from "../../withAuth";
+
 const Single = () => {
   let params = useParams();
 
