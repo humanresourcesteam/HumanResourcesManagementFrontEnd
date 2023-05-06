@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import AdminService from "../../service/AdminService";
 import ManagerService from "../../service/ManagerService";
+import CompanyService from "../../service/CompanyService";
 const Widget = ({ type }) => {
   let data;
   const token = Cookies.get("token");
@@ -15,7 +16,7 @@ const Widget = ({ type }) => {
   // total number of admin
   const [adminCount, setAdminCount] = useState(0);
   const [managerCount, setManagerCount] = useState(0);
-
+  const [companyCount, setCompanyCount] = useState(0);
   useEffect(() => {
     AdminService.getAllAdminCount(token).then((response) => {
       setAdminCount(response.data.length);
@@ -26,6 +27,13 @@ const Widget = ({ type }) => {
     console.log("useEffect runs");
     ManagerService.getAllAdminSummaryInfo().then((response) => {
       setManagerCount(response.data.length);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("useEffect runs");
+    CompanyService.getSummaryAllCompany().then((response) => {
+      setCompanyCount(response.data.length);
     });
   }, []);
 
@@ -61,9 +69,9 @@ const Widget = ({ type }) => {
       break;
     case "total":
       data = {
-        title: "TOTAL ADMIN",
-        link: "See all total admin",
-        count: adminCount,
+        title: "TOTAL COMPANY",
+        link: "See all total company",
+        count: companyCount,
         icon: (
           <AccessibilityNewOutlinedIcon
             className="icon"

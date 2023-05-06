@@ -8,8 +8,7 @@ import Tables from "../../components/table/Tables";
 import Table from "../../components/table/Tables";
 import WidgetNewEmployee from "../../components/widgetNewEmployee/WidgetNewEmployee";
 import { useEffect, useState } from "react";
-import AdminService from "../../service/AdminService";
-import Cookies from "js-cookie";
+
 import withAuth from "../../withAuth";
 const Home = () => {
   return (
