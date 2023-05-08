@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./new.scss";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
-import { managerRows } from "../../datatablesource";
-import Table from "../../components/table/Tables";
-import FileBase64 from "react-file-base64";
 import withAuth from "../../withAuth";
 import ManagerService from "../../service/ManagerService";
-
+import CompanyService from "../../service/CompanyService";
+import { useNavigate, useLocation } from "react-router-dom";
+import CreatableSelect from "react-select/creatable";
 const New = () => {
   const [image, setImage] = useState("");
-
+  const [optionList, setOptionList] = useState([]);
   const [newImage, setNewImage] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState(null);
+  const history = useNavigate();
+  const location = useLocation();
   const [manager, setManager] = useState({
     email: "",
     firstName: "",
@@ -24,9 +26,25 @@ const New = () => {
     image: "",
     identificationNumber: "",
     dateOfEmployment: "",
+    companyName: "",
   });
 
-  const [array, setArray] = useState({});
+  useEffect(() => {
+    CompanyService.getSummaryAllCompany().then((response) => {
+      const options = response.data.map((company) => ({
+        value: company.name,
+        label: company.name,
+      }));
+      setOptionList(options);
+    });
+    const selectedCompanyName = location.state?.selectedCompanyName;
+    if (selectedCompanyName) {
+      setSelectedOptions({
+        value: selectedCompanyName,
+        label: selectedCompanyName,
+      });
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +53,6 @@ const New = () => {
     ManagerService.addManager(manager).then(
       () => {
         alert("başarılı");
-        window.location.reload(true);
       },
       () => {
         alert("başarısız");
@@ -51,6 +68,14 @@ const New = () => {
       setNewImage(fileReader.result.split(",")[1]);
     };
     fileReader.readAsDataURL(file);
+  };
+
+  const handleSelect = (selectedOption) => {
+    setSelectedOptions(selectedOption);
+
+    if (selectedOption && selectedOption.__isNew__) {
+      history("/company/new", { state: { companyName: selectedOption.value } });
+    }
   };
 
   return (
@@ -85,6 +110,18 @@ const New = () => {
           </div>
           <div className="right">
             <form onSubmit={handleSubmit}>
+              <div className="formInput">
+                <CreatableSelect
+                  className="select"
+                  options={optionList}
+                  placeholder="Select Company"
+                  value={selectedOptions}
+                  onChange={handleSelect}
+                  formatCreateLabel={(inputValue) =>
+                    `Şirket Ekle: ${inputValue}`
+                  }
+                />
+              </div>
               <div className="formInput">
                 <label>Email</label>
                 <input
@@ -171,14 +208,13 @@ const New = () => {
                   }
                 />
               </div>
-
               <button
                 onClick={(e) => {
                   if (newImage != "") {
                     setManager({
                       ...manager,
-
                       image: newImage,
+                      companyName: selectedOptions.value,
                     });
                   }
                 }}

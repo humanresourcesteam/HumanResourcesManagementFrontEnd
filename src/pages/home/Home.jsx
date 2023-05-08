@@ -7,7 +7,7 @@ import Table from "../../components/table/Tables";
 import WidgetNewEmployee from "../../components/widgetNewEmployee/WidgetNewEmployee";
 
 import withAuth from "../../withAuth";
-import WidgetNewCompany from "../../components/widgetCompany/WidgetNewCompany";
+
 const Home = () => {
   return (
     <div className="home">
@@ -20,10 +20,8 @@ const Home = () => {
           <Widget type="employee" />
           <Widget type="total" />
         </div>
-        {/* CHART AREA */}
         <div className="charts">
           <WidgetNewEmployee />
-
           <Chart />
         </div>
         <div className="listContainer">

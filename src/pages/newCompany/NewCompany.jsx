@@ -7,40 +7,29 @@ import withAuth from "../../withAuth";
 import Select from "react-select";
 import Cookies from "js-cookie";
 import CompanyService from "../../service/CompanyService";
+import { useLocation, useNavigate } from "react-router-dom";
 const NewCompany = () => {
   const [image, setImage] = useState("");
   const token = Cookies.get("token");
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [newImage, setNewImage] = useState("");
-  const [date, setDate] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const companyName = location.state?.companyName || "New Company";
+
   const [company, setCompany] = useState({
     token: token,
     name: "",
-
     title: "",
-
     centralRegistrySystem: "",
-
     taxNumber: "",
-
     taxOffice: "",
-
     image: "",
-
     phone: "",
-
     address: "",
-
     email: "",
-
     numberOfWorkers: "",
-
     yearOfEstablishment: "",
-
     contractStartYear: "",
-
     contractEndYear: "",
-
     status: "",
   });
 
@@ -54,7 +43,9 @@ const NewCompany = () => {
       () => {
         alert("başarılı");
 
-        window.location.reload(true);
+        navigate("/manager/new", {
+          state: { selectedCompanyName: companyName },
+        });
       },
       () => {
         alert("başarısız");
@@ -132,6 +123,7 @@ const NewCompany = () => {
                       onChange={(e) =>
                         setCompany({ ...company, name: e.target.value })
                       }
+                      value={companyName}
                     />
                   </div>
                   <div className="formInput">
@@ -283,6 +275,7 @@ const NewCompany = () => {
                     setCompany({
                       ...company,
                       image: image,
+                      name: companyName,
                     });
                   }
                 }}
