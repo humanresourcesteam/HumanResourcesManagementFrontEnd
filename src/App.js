@@ -12,6 +12,8 @@ import ListCompany from "./pages/listCompany/ListCompany";
 import NewCompany from "./pages/newCompany/NewCompany";
 import SingleCompany from "./pages/singlecompany/SingleCompany";
 import "mapbox-gl/dist/mapbox-gl.css";
+import NotFound from "./pages/notfound/NotFound";
+
 function App() {
   return (
     <div className="App">
@@ -38,6 +40,7 @@ function App() {
               <Route index element={<Profile />} />
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

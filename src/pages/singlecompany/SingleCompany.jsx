@@ -11,6 +11,8 @@ import L from "leaflet";
 import Table from "../../components/table/Tables";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import CompanyService from "../../service/CompanyService";
+
 import {
   AreaChart,
   Area,
@@ -20,11 +22,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-const percentage = 66;
+
 const SingleCompany = () => {
   let params = useParams();
   const position = [51.505, -0.09];
-  const [manager, setManager] = useState({});
+  const [company, setCompany] = useState({});
   const data = [
     {
       name: "Page A",
@@ -70,6 +72,9 @@ const SingleCompany = () => {
     },
   ];
 
+  const [contractsDays, setContractsDays] = useState(0);
+  const [remaininDays, setRemainingDays] = useState(0);
+
   delete L.Icon.Default.prototype._getIconUrl;
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -77,12 +82,12 @@ const SingleCompany = () => {
     shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
   });
   useEffect(() => {
-    ManagerService.getInfoForManagerWithId(params.managerId).then(
-      (response) => {
-        setManager({ ...response.data });
-      }
-    );
+    CompanyService.getInfoForCompanyId(params.companyId).then((response) => {
+      setCompany({ ...response.data });
+    });
   }, []);
+
+  console.log(company);
 
   return (
     <div className="single">
@@ -90,8 +95,8 @@ const SingleCompany = () => {
       <div className="singleContainer">
         <Navbar />
         <div className="top">
-          <img src="" alt="" />
-          <h2>{manager.firstName + " " + manager.surname}</h2>
+          <img src={company.image} alt="" />
+          <h2>{company.name}</h2>
         </div>
         <div className="bottom">
           <div className="bottom-top"></div>
@@ -103,27 +108,31 @@ const SingleCompany = () => {
                   <div className="first-side">
                     <div className="input-form">
                       <label htmlFor="">Company Name:</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input type="text" value={company.name} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Central Registry System:</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input
+                        type="text"
+                        value={company.centralRegistrySystem}
+                        disabled
+                      />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Tax Number:</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input type="text" value={company.taxNumber} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Tax Office:</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input type="text" value={company.taxOffice} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Phone:</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input type="text" value={company.phone} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Email:</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input type="text" value={company.email} disabled />
                     </div>
                   </div>
                 </div>
@@ -139,9 +148,9 @@ const SingleCompany = () => {
                     />
                     <Marker position={position}>
                       <Popup>
-                        A sample popup.
+                        {company.name}
                         <br />
-                        Easily customizable.
+                        {company.address}
                       </Popup>
                     </Marker>
                   </MapContainer>
@@ -182,8 +191,16 @@ const SingleCompany = () => {
                   <h3>Remaining Contract Term</h3>
                   <CircularProgressbar
                     strokeWidth={1}
-                    value={percentage}
-                    text={`${percentage}%`}
+                    value={
+                      (company.allContractDay -
+                        (company.allContractDay - company.remainingDays) /
+                          contractsDays) *
+                      100
+                    }
+                    text={`${
+                      company.allContractDay -
+                      (company.allContractDay - company.remainingDays)
+                    } days`}
                     styles={buildStyles({
                       rotation: 0.25,
                       strokeLinecap: "butt",
@@ -192,7 +209,10 @@ const SingleCompany = () => {
 
                       pathTransitionDuration: 0.5,
 
-                      pathColor: `rgba(62, 152, 199, ${percentage / 100})`,
+                      pathColor: `rgba(62, 152, 199, ${
+                        company.allContractDay -
+                        (company.allContractDay - company.remainingDays)
+                      })`,
                       textColor: "#f88",
                       trailColor: "#d6d6d6",
                       backgroundColor: "#3e98c7",

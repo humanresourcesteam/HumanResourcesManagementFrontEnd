@@ -66,10 +66,6 @@ const NewCompany = () => {
     const file = e.target.files[0];
     setImage(file);
   };
-  const handleDate = (e) => {
-    const date = e.target.value;
-    setDate(date);
-  };
 
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
