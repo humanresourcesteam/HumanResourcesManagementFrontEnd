@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./new.scss";
@@ -9,12 +9,12 @@ import CompanyService from "../../service/CompanyService";
 import { useNavigate, useLocation } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 const New = () => {
-  // STATE REACT-DOM
   const [optionList, setOptionList] = useState([]);
   const [newImage, setNewImage] = useState("");
   const [selectedOptions, setSelectedOptions] = useState(null);
   const history = useNavigate();
   const location = useLocation();
+  const inputFileRef = useRef(null);
   const [manager, setManager] = useState({
     email: "",
     firstName: "",
@@ -29,7 +29,10 @@ const New = () => {
     companyName: "",
   });
 
-  //  API
+  const handleImageClick = () => {
+    inputFileRef.current.click(); // Trigger the click event on the input element
+  };
+
   useEffect(() => {
     CompanyService.getSummaryAllCompany().then((response) => {
       const options = response.data.map((company) => ({
@@ -92,15 +95,15 @@ const New = () => {
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               className="image"
+              onClick={handleImageClick}
             />
             <div className="formInput">
-              <label htmlFor="file">
-                <DriveFolderUploadIcon className="icon" />
-              </label>
+              <label htmlFor="file"></label>
               <input
                 type="file"
                 id="file"
                 onChange={onChangeImage}
+                ref={inputFileRef}
                 style={{ display: "none" }}
               />
             </div>
@@ -152,7 +155,12 @@ const New = () => {
                 <input
                   type="date"
                   onChange={(e) =>
-                    setManager({ ...manager, birthDate: e.target.value })
+                    setManager({
+                      ...manager,
+                      birthDate: new Date(e.target.value)
+                        .toISOString()
+                        .substring(0, 10),
+                    })
                   }
                 />
               </div>
@@ -178,9 +186,7 @@ const New = () => {
                   onChange={(e) =>
                     setManager({
                       ...manager,
-                      birthdayPlace: new Date(e.target.value)
-                        .toISOString()
-                        .substring(0, 10),
+                      birthdayPlace: e.target.value,
                     })
                   }
                 />

@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./newcompany.scss";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
@@ -8,13 +10,14 @@ import Select from "react-select";
 import Cookies from "js-cookie";
 import CompanyService from "../../service/CompanyService";
 import { useLocation, useNavigate } from "react-router-dom";
+import { validateCompanyForm } from "../../utils/validate";
 const NewCompany = () => {
   const [image, setImage] = useState("");
   const token = Cookies.get("token");
   const location = useLocation();
   const navigate = useNavigate();
-  const companyName = location.state?.companyName || "New Company";
-
+  const companyName = location.state?.companyName;
+  const inputFileRef = useRef(null);
   const [company, setCompany] = useState({
     token: token,
     name: "",
@@ -32,27 +35,42 @@ const NewCompany = () => {
     contractEndYear: "",
     status: "",
   });
+  const [phone, setPhone] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(company);
-    const date = new Date(company.contractStartYear);
-    console.log(date);
-
-    CompanyService.addCompany(company).then(
-      () => {
-        alert("başarılı");
-
-        navigate("/manager/new", {
-          state: { selectedCompanyName: companyName },
-        });
-      },
-      () => {
-        alert("başarısız");
-      }
-    );
+    if (!validateForm()) {
+      const date = new Date(company.contractStartYear);
+      CompanyService.addCompany(company).then(
+        () => {
+          alert("başarılı");
+          if (companyName != "") {
+            navigate("/manager/new", {
+              state: { selectedCompanyName: companyName },
+            });
+          }
+          navigate("/company");
+        },
+        () => {
+          alert("başarısız");
+        }
+      );
+    }
   };
 
+  const handleImageClick = () => {
+    inputFileRef.current.click(); // Trigger the click event on the input element
+  };
+
+  // Validations in the /utils/validation class were used to catch errors
+  const [errors, setErrors] = useState({});
+  const validateForm = () => {
+    const { errorsArray: newErrors, errors } = validateCompanyForm(company);
+    setErrors(newErrors);
+    return errors;
+  };
+
+  //method used to adjust the photo
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -73,6 +91,7 @@ const NewCompany = () => {
     { value: "COOPERATIVE", label: "Cooperative" },
     { value: "COLLECTIVE", label: "Collective" },
   ];
+
   return (
     <div className="new">
       <Sidebar />
@@ -90,16 +109,16 @@ const NewCompany = () => {
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               className="image"
+              onClick={handleImageClick}
             />
             <div className="formInput">
-              <label htmlFor="file">
-                <DriveFolderUploadIcon className="icon" />
-              </label>
+              <label htmlFor="file"></label>
               <input
                 type="file"
                 id="file"
                 onChange={onChangeImage}
                 style={{ display: "none" }}
+                ref={inputFileRef}
               />
             </div>
           </div>
@@ -115,6 +134,7 @@ const NewCompany = () => {
                         setCompany({ ...company, email: e.target.value })
                       }
                     />
+                    {errors.email && <small>{errors.email}</small>}
                   </div>
                   <div className="formInput">
                     <label>Company Name</label>
@@ -125,6 +145,7 @@ const NewCompany = () => {
                       }
                       value={companyName}
                     />
+                    {errors.name && <small>{errors.name}</small>}
                   </div>
                   <div className="formInput">
                     <label>Title</label>
@@ -142,6 +163,7 @@ const NewCompany = () => {
                         setCompany({ ...company, title: e.value });
                       }}
                     />
+                    {errors.title && <small>{errors.title}</small>}
                   </div>
                   <div className="formInput">
                     <label>Mersis No</label>
@@ -154,6 +176,9 @@ const NewCompany = () => {
                         })
                       }
                     />
+                    {errors.centralRegistrySystem && (
+                      <small>{errors.centralRegistrySystem}</small>
+                    )}
                   </div>
                   <div className="formInput">
                     <label>Tax Number</label>
@@ -163,6 +188,7 @@ const NewCompany = () => {
                         setCompany({ ...company, taxNumber: e.target.value })
                       }
                     />
+                    {errors.taxNumber && <small>{errors.taxNumber}</small>}
                   </div>
                   <div className="formInput">
                     <label>Tax Office</label>
@@ -172,16 +198,19 @@ const NewCompany = () => {
                         setCompany({ ...company, taxOffice: e.target.value })
                       }
                     />
+                    {errors.taxOffice && <small>{errors.taxOffice}</small>}
                   </div>
 
                   <div className="formInput">
                     <label>Phone</label>
-                    <input
-                      type="text"
-                      onChange={(e) =>
-                        setCompany({ ...company, phone: e.target.value })
-                      }
+                    <PhoneInput
+                      className="phoneInput"
+                      placeholder="Enter phone number"
+                      value={"90"}
+                      onChange={setPhone}
+                      defaultCountry="TR"
                     />
+                    {errors.phone && <small>{errors.phone}</small>}
                   </div>
                 </div>
                 <div className="right-side">
@@ -198,6 +227,9 @@ const NewCompany = () => {
                         })
                       }
                     />
+                    {errors.yearOfEstablishment && (
+                      <small>{errors.yearOfEstablishment}</small>
+                    )}
                   </div>
                   <div className="formInput">
                     <label>Contract Start Date</label>
@@ -212,6 +244,9 @@ const NewCompany = () => {
                         })
                       }
                     />
+                    {errors.contractStartYear && (
+                      <small>{errors.contractStartYear}</small>
+                    )}
                   </div>
                   <div className="formInput">
                     <label>Contract End Date</label>
@@ -226,6 +261,9 @@ const NewCompany = () => {
                         })
                       }
                     />
+                    {errors.contractEndYear && (
+                      <small>{errors.contractEndYear}</small>
+                    )}
                   </div>
                   <div className="formInput">
                     <label>Activation Status</label>
@@ -243,6 +281,7 @@ const NewCompany = () => {
                         setCompany({ ...company, status: e.value });
                       }}
                     />
+                    {errors.status && <small>{errors.status}</small>}
                   </div>
                   <div className="formInput">
                     <label>Address</label>
@@ -252,6 +291,7 @@ const NewCompany = () => {
                         setCompany({ ...company, address: e.target.value })
                       }
                     />
+                    {errors.address && <small>{errors.address}</small>}
                   </div>
                   <div className="formInput">
                     <label>Number of Employees</label>
@@ -266,6 +306,9 @@ const NewCompany = () => {
                         )
                       }
                     />
+                    {errors.numberOfWorkers && (
+                      <small>{errors.numberOfWorkers}</small>
+                    )}
                   </div>
                 </div>
               </div>
@@ -275,7 +318,8 @@ const NewCompany = () => {
                     setCompany({
                       ...company,
                       image: image,
-                      name: companyName,
+
+                      phone: phone,
                     });
                   }
                 }}

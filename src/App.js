@@ -24,10 +24,10 @@ function App() {
               <Route path=":managerId" element={<Single />} />
               <Route path="new" element={<New />} />
             </Route>
-            <Route path="employee">
+            {/* <Route path="employee">
               <Route index element={<ListEmployee />} />
               <Route path=":employeeId" element={<Single />} />
-            </Route>
+            </Route> */}
             <Route path="company">
               <Route index element={<ListCompany />} />
               <Route path=":companyId" element={<SingleCompany />} />

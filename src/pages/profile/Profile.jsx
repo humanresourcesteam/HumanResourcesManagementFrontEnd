@@ -2,7 +2,7 @@ import "./profile.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import AdminService from "../../service/AdminService";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
@@ -11,7 +11,7 @@ const Profile = () => {
   const token = Cookies.get("token");
 
   const [admin, setAdmin] = useState({});
-
+  const inputFileRef = useRef(null);
   const [data, setData] = useState({
     firstName: "",
     surname: "",
@@ -34,6 +34,10 @@ const Profile = () => {
   const [newImage, setNewImage] = useState("");
 
   const [role, setRole] = useState("");
+
+  const handleImageClick = () => {
+    inputFileRef.current.click(); // Trigger the click event on the input element
+  };
 
   const onChangeImage = (e) => {
     const file = e.target.files[0];
@@ -108,14 +112,14 @@ const Profile = () => {
               <img
                 src={image ? URL.createObjectURL(image) : admin.image}
                 className="image"
+                onClick={handleImageClick}
               />
             </div>
-            <label htmlFor="file">
-              <DriveFolderUploadIcon className="icon" />
-            </label>
+            <label htmlFor="file"></label>
             <input
               type="file"
               id="file"
+              ref={inputFileRef}
               onChange={onChangeImage}
               style={{ display: "none" }}
             />

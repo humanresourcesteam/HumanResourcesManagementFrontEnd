@@ -18,7 +18,7 @@ const WidgetNewEmployee = () => {
     console.log("useEffect runs");
 
     axios
-      .get("http://localhost:9092/manager/find-five-manager")
+      .get("http://localhost:9092/api/v1/manager/find-five-manager")
       .then((response) => {
         setWidgetmanager([...response.data]);
       });

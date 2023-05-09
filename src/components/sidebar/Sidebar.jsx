@@ -66,12 +66,12 @@ const Sidebar = () => {
               <span>Manager</span>
             </li>
           </Link>
-          <Link to="/employee" style={{ textDecoration: "none" }}>
+          {/* <Link to="/employee" style={{ textDecoration: "none" }}>
             <li>
               <BadgeOutlinedIcon className="icon" />
               <span>Employee</span>
             </li>
-          </Link>
+          </Link> */}
           <Link to="/company" style={{ textDecoration: "none" }}>
             <li>
               <ApartmentIcon className="icon" />
