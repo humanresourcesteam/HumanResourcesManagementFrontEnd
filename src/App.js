@@ -1,17 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/home/Home";
-
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import "./style/darkmode.scss";
 import ListEmployee from "./pages/listEmployee/ListEmployee";
 import Profile from "./pages/profile/Profile";
 import ListCompany from "./pages/listCompany/ListCompany";
 import NewCompany from "./pages/newCompany/NewCompany";
 import SingleCompany from "./pages/singlecompany/SingleCompany";
-import "mapbox-gl/dist/mapbox-gl.css";
 import NotFound from "./pages/notfound/NotFound";
 
 function App() {
@@ -46,5 +43,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

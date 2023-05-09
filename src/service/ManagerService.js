@@ -18,7 +18,11 @@ class ManagerService {
   }
 
   addManager(data) {
-    return axios.post(ADD_MANAGER, data);
+    return axios.post(ADD_MANAGER, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   }
 
   getFiveManager() {

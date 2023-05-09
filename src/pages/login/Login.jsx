@@ -10,6 +10,8 @@ const Login = () => {
     password: "",
   });
 
+  const [loginError, setLoginError] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     AuthService.login(admin).then(
@@ -20,7 +22,7 @@ const Login = () => {
         window.location.replace("/");
       },
       () => {
-        alert("giriş başarısız");
+        setLoginError(true);
       }
     );
   };
@@ -67,7 +69,9 @@ const Login = () => {
             </label>
             <div className="form__shadow"></div>
           </div>
-
+          {loginError && (
+            <p style={{ color: "red" }}>Login is incorrect please try again</p>
+          )}
           <div className="form__button">
             <input type="submit" className="form__submit" value="Sign-In" />
           </div>

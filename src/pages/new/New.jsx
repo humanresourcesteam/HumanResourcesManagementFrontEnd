@@ -9,6 +9,7 @@ import CompanyService from "../../service/CompanyService";
 import { useNavigate, useLocation } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 const New = () => {
+  // STATE REACT-DOM
   const [image, setImage] = useState("");
   const [optionList, setOptionList] = useState([]);
   const [newImage, setNewImage] = useState("");
@@ -29,6 +30,7 @@ const New = () => {
     companyName: "",
   });
 
+  //  API
   useEffect(() => {
     CompanyService.getSummaryAllCompany().then((response) => {
       const options = response.data.map((company) => ({
@@ -46,6 +48,7 @@ const New = () => {
     }
   }, []);
 
+  //  METHODS
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(manager);
@@ -62,12 +65,7 @@ const New = () => {
 
   const onChangeImage = (e) => {
     const file = e.target.files[0];
-    setImage(file);
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setNewImage(fileReader.result.split(",")[1]);
-    };
-    fileReader.readAsDataURL(file);
+    setNewImage(file);
   };
 
   const handleSelect = (selectedOption) => {
@@ -90,8 +88,8 @@ const New = () => {
           <div className="left">
             <img
               src={
-                image
-                  ? URL.createObjectURL(image)
+                newImage
+                  ? URL.createObjectURL(newImage)
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               className="image"
@@ -118,7 +116,7 @@ const New = () => {
                   value={selectedOptions}
                   onChange={handleSelect}
                   formatCreateLabel={(inputValue) =>
-                    `Şirket Ekle: ${inputValue}`
+                    `Add Company: ${inputValue}`
                   }
                 />
               </div>
@@ -164,7 +162,12 @@ const New = () => {
                 <input
                   type="date"
                   onChange={(e) =>
-                    setManager({ ...manager, dateOfEmployment: e.target.value })
+                    setManager({
+                      ...manager,
+                      dateOfEmployment: new Date(e.target.value)
+                        .toISOString()
+                        .substring(0, 10),
+                    })
                   }
                 />
               </div>
@@ -174,7 +177,12 @@ const New = () => {
                   type="text"
                   placeholder="Istanbul"
                   onChange={(e) =>
-                    setManager({ ...manager, birthdayPlace: e.target.value })
+                    setManager({
+                      ...manager,
+                      birthdayPlace: new Date(e.target.value)
+                        .toISOString()
+                        .substring(0, 10),
+                    })
                   }
                 />
               </div>
