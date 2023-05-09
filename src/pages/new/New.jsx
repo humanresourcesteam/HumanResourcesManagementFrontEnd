@@ -10,7 +10,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 const New = () => {
   // STATE REACT-DOM
-  const [image, setImage] = useState("");
   const [optionList, setOptionList] = useState([]);
   const [newImage, setNewImage] = useState("");
   const [selectedOptions, setSelectedOptions] = useState(null);

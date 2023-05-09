@@ -42,6 +42,7 @@ const Profile = () => {
 
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
+      console.log(response);
       setAdmin((admin) => ({
         ...admin,
         ...response.data,

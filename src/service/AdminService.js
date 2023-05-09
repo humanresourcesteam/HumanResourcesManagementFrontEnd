@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const GET_ALL_ADMIN_INFO = "http://localhost:9091/admin/getınfo?token=";
+const GET_ALL_ADMIN_INFO = "http://localhost:9091/api/v1/admin/getınfo?token=";
 
-const UPDATE_ADMIN = "http://localhost:9091/admin/update";
+const UPDATE_ADMIN = "http://localhost:9091/api/v1/admin/update";
 
 const LIST_DETAIL_INFORMATION =
-  "http://localhost:9091/admin/detail-information?token=";
+  "http://localhost:9091/api/v1/admin/detail-information?token=";
 
 class AdminService {
   getAllAdminInfo(token) {
@@ -15,8 +15,8 @@ class AdminService {
   updateAdmin(data) {
     return axios.post(UPDATE_ADMIN, data, {
       headers: {
-        'Content-Type': 'multipart/form-data'
-    }
+        "Content-Type": "multipart/form-data",
+      },
     });
   }
 
