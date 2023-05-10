@@ -5,14 +5,15 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import AccessibilityNewOutlinedIcon from "@mui/icons-material/AccessibilityNewOutlined";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import AdminService from "../../service/AdminService";
 import ManagerService from "../../service/ManagerService";
 import CompanyService from "../../service/CompanyService";
+import DarkModeContext from "../../context/darkModeContext";
 const Widget = ({ type }) => {
   let data;
   const token = Cookies.get("token");
-
+  const { darkMode } = useContext(DarkModeContext);
   // total number of admin
   const [adminCount, setAdminCount] = useState(0);
   const [managerCount, setManagerCount] = useState(0);
@@ -85,7 +86,7 @@ const Widget = ({ type }) => {
   }
 
   return (
-    <div className="widget">
+    <div className={`widget${darkMode ? " dark-mode" : ""}`}>
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">{data.count}</span>

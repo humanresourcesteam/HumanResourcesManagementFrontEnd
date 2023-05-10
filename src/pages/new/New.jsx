@@ -30,7 +30,7 @@ const New = () => {
   });
 
   const handleImageClick = () => {
-    inputFileRef.current.click(); // Trigger the click event on the input element
+    inputFileRef.current.click();
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const New = () => {
     }
   }, []);
 
-  //  METHODS
+  //METHODS
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(manager);

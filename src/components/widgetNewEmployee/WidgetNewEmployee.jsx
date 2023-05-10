@@ -1,9 +1,10 @@
 import "./widgetnewemployee.scss";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ManagerService from "../../service/ManagerService";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import DarkModeContext from "../../context/darkModeContext";
 const WidgetNewEmployee = () => {
   const [widgetmanager, setWidgetmanager] = useState([
     {
@@ -13,7 +14,7 @@ const WidgetNewEmployee = () => {
       email: "",
     },
   ]);
-
+  const { darkMode } = useContext(DarkModeContext);
   useEffect(() => {
     console.log("useEffect runs");
 
@@ -27,16 +28,12 @@ const WidgetNewEmployee = () => {
     };
   }, []);
   return (
-    <div className="widgetNew">
+    <div className={`widgetNew${darkMode ? " dark-mode" : ""}`}>
       <span className="widgetSmTitle">New Join Employee</span>
       <ul className="widgetSmList">
         {widgetmanager.map((employee, index) => (
           <li key={index} className="widgetSmListItem">
-            <img
-              src={"http://localhost:9091/images/" + employee.image}
-              alt=""
-              className="widgetSmImg"
-            />
+            <img src={employee.image} alt="" className="widgetSmImg" />
             <div className="widgetSmEmployee">
               <span className="widgetUsername">
                 {employee.firstName} {employee.surname}

@@ -1,12 +1,23 @@
 :root {
-  --first-color: #0b2447;
-  --second-color: #19376d;
-  --third-color: #576cbc;
-  --light-color: #a5d7e8;
+  /* Light mode variables */
+  /* ... */
+  --widgetNew-bg-color: white;
+  --widgetNew-shadow-color: rgba(201, 201, 201, 0.47);
+  --widgetNew-title-color: #467599;
+  --widgetNew-button-bg-color: #eeeef7;
+  --widgetNew-button-text-color: #555;
+
+  /* Dark mode variables */
+  /* ... */
+  --dark-widgetNew-bg-color: #121212;
+  --dark-widgetNew-shadow-color: rgba(95, 94, 94, 0.664);
+  --dark-widgetNew-title-color: #e2dafc;
+  --dark-widgetNew-button-bg-color: #4d4d4db7;
+  --dark-widgetNew-button-text-color: white;
 }
 
 .widgetNew {
-  flex: 1;
+  flex: 2;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   border-radius: 15px;
@@ -31,7 +42,7 @@
       align-items: center;
       justify-content: space-between;
       margin: 20px 0px;
-      gap: 15px;
+      gap: 35px;
 
       .widgetSmEmployee {
         display: flex;
@@ -59,5 +70,38 @@
         font-size: 16px;
       }
     }
+  }
+}
+
+.widgetNew {
+  /* ... */
+  background-color: var(--widgetNew-bg-color);
+  box-shadow: 2px 4px 10px 1px var(--widgetNew-shadow-color);
+  /* ... */
+
+  .widgetSmTitle {
+    /* ... */
+    color: var(--widgetNew-title-color);
+  }
+
+  .widgetSmButton {
+    /* ... */
+    background-color: var(--widgetNew-button-bg-color);
+    color: var(--widgetNew-button-text-color);
+    /* ... */
+  }
+}
+
+.widgetNew.dark-mode {
+  background-color: var(--dark-widgetNew-bg-color);
+  box-shadow: 2px 4px 10px 1px var(--dark-widgetNew-shadow-color);
+
+  .widgetSmTitle {
+    color: var(--dark-widgetNew-title-color);
+  }
+
+  .widgetSmButton {
+    background-color: var(--dark-widgetNew-button-bg-color);
+    color: var(--dark-widgetNew-button-text-color);
   }
 }

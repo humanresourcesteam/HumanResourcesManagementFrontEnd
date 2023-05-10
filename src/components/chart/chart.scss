@@ -1,3 +1,23 @@
+:root {
+  /* Light mode variables */
+  /* ... */
+  --axis-stroke-color: #666;
+  --grid-stroke-color: #ccc;
+  --tooltip-bg-color: #ffffff;
+  --tooltip-text-color: #333;
+  --tooltip-border-color: #ccc;
+  --line-stroke-color: #0b2447;
+
+  /* Dark mode variables */
+  /* ... */
+  --dark-axis-stroke-color: #aaa;
+  --dark-grid-stroke-color: #555;
+  --dark-tooltip-bg-color: #333;
+  --dark-tooltip-text-color: #ddd;
+  --dark-tooltip-border-color: #555555a6;
+  --dark-line-stroke-color: #e2dafc;
+}
+
 .chart {
   flex: 7;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);

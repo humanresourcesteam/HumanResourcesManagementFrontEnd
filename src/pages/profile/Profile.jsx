@@ -3,47 +3,34 @@ import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState, useRef } from "react";
-import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 
 const Profile = () => {
   const token = Cookies.get("token");
-
   const [admin, setAdmin] = useState({});
   const inputFileRef = useRef(null);
   const [data, setData] = useState({
     firstName: "",
     surname: "",
     email: "",
-    // dateOfEmployment: "",
     image: "",
     token: token,
   });
-
   const [date, setDate] = useState("");
-
   const [email, setEmail] = useState("");
-
   const [firstName, setFirstName] = useState("");
-
   const [surname, setSurname] = useState("");
-
   const [image, setImage] = useState("");
-
-  const [newImage, setNewImage] = useState("");
-
   const [role, setRole] = useState("");
 
   const handleImageClick = () => {
-    inputFileRef.current.click(); // Trigger the click event on the input element
+    inputFileRef.current.click();
   };
-
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
   };
-
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
       console.log(response);
@@ -56,15 +43,12 @@ const Profile = () => {
       setEmail(response.data.email);
       setFirstName(response.data.firstName);
       setSurname(response.data.surname);
-      // setImage(response.data.image);
       setRole(response.data.role);
     });
   }, []);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(data);
-
     AdminService.updateAdmin(data).then(
       () => {
         const Toast = Swal.mixin({
@@ -78,7 +62,6 @@ const Profile = () => {
             toast.addEventListener("mouseleave", Swal.resumeTimer);
           },
         });
-
         Toast.fire({
           icon: "success",
           title: "Signed in successfully",
@@ -95,9 +78,6 @@ const Profile = () => {
       }
     );
   };
-
-  // const APP_KEY = "	klfx6ixtvzrzm3h";
-
   return (
     <div className="single">
       <Sidebar />

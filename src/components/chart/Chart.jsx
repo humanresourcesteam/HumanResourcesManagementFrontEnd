@@ -1,4 +1,6 @@
 import "./chart.scss";
+import DarkModeContext from "../../context/darkModeContext";
+import { useState, useContext } from "react";
 import {
   LineChart,
   Line,
@@ -17,9 +19,12 @@ const data = [
   { name: "May", TotalEmployee: 900 },
   { name: "June", TotalEmployee: 1700 },
 ];
+
 const Chart = () => {
+  const { darkMode } = useContext(DarkModeContext);
+
   return (
-    <div className="chart">
+    <div className={`chart${darkMode ? " dark-mode" : ""}`}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}
@@ -32,15 +37,51 @@ const Chart = () => {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="1 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
+          <CartesianGrid
+            strokeDasharray="1 3"
+            stroke={
+              darkMode
+                ? "var(--dark-grid-stroke-color)"
+                : "var(--grid-stroke-color)"
+            }
+          />
+          <XAxis
+            dataKey="name"
+            stroke={
+              darkMode
+                ? "var(--dark-axis-stroke-color)"
+                : "var(--axis-stroke-color)"
+            }
+          />
+          <YAxis
+            stroke={
+              darkMode
+                ? "var(--dark-axis-stroke-color)"
+                : "var(--axis-stroke-color)"
+            }
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: darkMode
+                ? "var(--dark-tooltip-bg-color)"
+                : "var(--tooltip-bg-color)",
+              borderColor: darkMode
+                ? "var(--dark-tooltip-border-color)"
+                : "var(--tooltip-border-color)",
+              color: darkMode
+                ? "var(--dark-tooltip-text-color)"
+                : "var(--tooltip-text-color)",
+            }}
+          />
           <Legend />
           <Line
             type="monotone"
             dataKey="TotalEmployee"
-            stroke="#0b2447"
+            stroke={
+              darkMode
+                ? "var(--dark-line-stroke-color)"
+                : "var(--line-stroke-color)"
+            }
             activeDot={{ r: 8 }}
           />
         </LineChart>

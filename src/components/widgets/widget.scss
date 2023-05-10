@@ -1,3 +1,23 @@
+:root {
+  /* Light mode variables */
+  /* ... */
+  --widget-bg-color: white;
+  --widget-shadow-color: rgba(201, 201, 201, 0.47);
+  --widget-title-color: #d64045;
+  --widget-counter-color: #1d3354;
+  --widget-link-border-color: gray;
+  --widget-icon-bg-color: var(--light-color);
+
+  /* Dark mode variables */
+  /* ... */
+  --dark-widget-bg-color: #121212;
+  --dark-widget-shadow-color: rgba(114, 113, 113, 0.47);
+  --dark-widget-title-color: #e2dafc;
+  --dark-widget-counter-color: white;
+  --dark-widget-link-border-color: white;
+  --dark-widget-icon-bg-color: #e2dafc;
+}
+
 .widget {
   display: flex;
   justify-content: space-between;
@@ -48,6 +68,77 @@
       padding: 5px;
       background-color: var(--light-color);
       align-self: flex-end;
+    }
+  }
+}
+.widget {
+  /* ... */
+  background-color: var(--widget-bg-color);
+  box-shadow: 2px 4px 10px 1px var(--widget-shadow-color);
+  /* ... */
+
+  .left {
+    /* ... */
+
+    .title {
+      /* ... */
+      color: var(--widget-title-color);
+    }
+
+    .counter {
+      /* ... */
+      color: var(--widget-counter-color);
+    }
+
+    .link {
+      /* ... */
+      border-bottom: 1px solid var(--widget-link-border-color);
+    }
+  }
+
+  .right {
+    /* ... */
+
+    .icon {
+      /* ... */
+      background-color: var(--widget-icon-bg-color);
+    }
+  }
+}
+
+.widget.dark-mode {
+  background-color: var(--dark-widget-bg-color);
+  box-shadow: 2px 4px 10px 1px var(--dark-widget-shadow-color);
+
+  .left {
+    .title {
+      color: var(--dark-widget-title-color);
+    }
+
+    .counter {
+      color: var(--dark-widget-counter-color);
+    }
+
+    .link {
+      border-bottom: 1px solid var(--dark-widget-link-border-color);
+      color: var(--dark-widget-link-border-color);
+    }
+  }
+
+  .right {
+    .icon {
+      background-color: var(--dark-widget-icon-bg-color);
+    }
+    .percentage {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      &.positive {
+        color: white;
+      }
+      &.negative {
+        color: white;
+      }
     }
   }
 }

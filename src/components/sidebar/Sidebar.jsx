@@ -12,13 +12,14 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
 import Profile from "../../assets/profile.png";
 import AdminService from "../../service/AdminService";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Cookies from "js-cookie";
 import Logout from "../logout/Logout";
 import ApartmentIcon from "@mui/icons-material/Apartment";
+import DarkModeContext from "../../context/darkModeContext";
 const Sidebar = () => {
   const [admin, setAdmin] = useState({});
-
+  const { darkMode } = useContext(DarkModeContext);
   const token = Cookies.get("token");
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
@@ -30,7 +31,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar${darkMode ? " dark-mode" : ""}`}>
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">HumanCo</span>
