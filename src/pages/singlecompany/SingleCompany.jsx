@@ -75,6 +75,7 @@ const SingleCompany = () => {
   const [contractsDays, setContractsDays] = useState(0);
   const [remaininDays, setRemainingDays] = useState(0);
 
+  const [manager, setManager] = useState({});
   delete L.Icon.Default.prototype._getIconUrl;
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -86,8 +87,13 @@ const SingleCompany = () => {
       setCompany({ ...response.data });
     });
   }, []);
-
-  console.log(company);
+  useEffect(() => {
+    ManagerService.getManagerInfoForCompany(params.companyId).then(
+      (response) => {
+        setManager({ ...response.data });
+      }
+    );
+  }, []);
 
   return (
     <div className="single">
@@ -108,7 +114,7 @@ const SingleCompany = () => {
                   <div className="first-side">
                     <div className="input-form">
                       <label htmlFor="">Company Name:</label>
-                      <input type="text" value={company.name} disabled />
+                      <input type="text" value={company.firstName} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Central Registry System:</label>
@@ -163,22 +169,30 @@ const SingleCompany = () => {
                 <div className="manager-info-company">
                   <div className="img-manager">
                     <img
-                      src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      src={
+                        manager.image
+                          ? manager.image
+                          : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      }
                       alt=""
                     />
                   </div>
                   <div className="manager-info-companys">
                     <div className="input-form">
                       <label htmlFor="">Manager Name</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input
+                        type="text"
+                        value={manager.firstName + " " + manager.surname}
+                        disabled
+                      />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Manager Email</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input type="text" value={manager.email} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Manager Phone</label>
-                      <input type="text" value={"deneme"} disabled />
+                      <input type="text" value={manager.phone} disabled />
                     </div>
                   </div>
                 </div>
