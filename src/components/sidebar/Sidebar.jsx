@@ -1,6 +1,6 @@
 import "./sidebar.scss";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
-import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
+
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -10,7 +10,6 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutlinedSharp";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
-import Profile from "../../assets/profile.png";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState, useContext } from "react";
 import Cookies from "js-cookie";

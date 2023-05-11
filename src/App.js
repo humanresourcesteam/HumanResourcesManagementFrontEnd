@@ -4,7 +4,6 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import ListEmployee from "./pages/listEmployee/ListEmployee";
 import Profile from "./pages/profile/Profile";
 import ListCompany from "./pages/listCompany/ListCompany";
 import NewCompany from "./pages/newCompany/NewCompany";

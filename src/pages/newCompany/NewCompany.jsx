@@ -46,7 +46,7 @@ const NewCompany = () => {
           alert("başarılı");
           if (companyName != "") {
             navigate("/manager/new", {
-              state: { selectedCompanyName: companyName },
+              state: { selectedCompanyName: company.name },
             });
           }
           navigate("/company");
@@ -143,7 +143,6 @@ const NewCompany = () => {
                       onChange={(e) =>
                         setCompany({ ...company, name: e.target.value })
                       }
-                      value={companyName}
                     />
                     {errors.name && <small>{errors.name}</small>}
                   </div>
@@ -318,7 +317,6 @@ const NewCompany = () => {
                     setCompany({
                       ...company,
                       image: image,
-
                       phone: phone,
                     });
                   }

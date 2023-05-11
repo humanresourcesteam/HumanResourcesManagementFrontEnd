@@ -74,30 +74,21 @@
   color: var(--navbar-text-color);
 
   .wrapper {
-    /* ... */
-
     .search {
-      /* ... */
       border: 0.5px solid var(--navbar-search-border-color);
 
       input {
-        /* ... */
       }
     }
 
     .items {
-      /* ... */
-
       .item {
-        /* ... */
-
         .icon {
           font-size: 20px;
           color: var(--navbar-icon-color);
         }
 
         .avatar {
-          /* ... */
         }
       }
     }

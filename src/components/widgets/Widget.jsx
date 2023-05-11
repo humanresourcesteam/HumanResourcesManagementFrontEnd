@@ -1,6 +1,6 @@
 import "./widget.scss";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import AccessibilityNewOutlinedIcon from "@mui/icons-material/AccessibilityNewOutlined";
@@ -25,14 +25,12 @@ const Widget = ({ type }) => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect runs");
     ManagerService.getAllAdminSummaryInfo().then((response) => {
       setManagerCount(response.data.length);
     });
   }, []);
 
   useEffect(() => {
-    console.log("useEffect runs");
     CompanyService.getSummaryAllCompany().then((response) => {
       setCompanyCount(response.data.length);
     });
