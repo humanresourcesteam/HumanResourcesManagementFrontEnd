@@ -114,7 +114,7 @@ const SingleCompany = () => {
                   <div className="first-side">
                     <div className="input-form">
                       <label htmlFor="">Company Name:</label>
-                      <input type="text" value={company.firstName} disabled />
+                      <input type="text" value={company.name} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Central Registry System:</label>

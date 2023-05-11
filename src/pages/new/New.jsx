@@ -8,7 +8,7 @@ import ManagerService from "../../service/ManagerService";
 import CompanyService from "../../service/CompanyService";
 import { useNavigate, useLocation } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
-import {validateManagerForm} from "../../utils/validatemanager";
+import { validateManagerForm } from "../../utils/validatemanager";
 const New = () => {
   const [optionList, setOptionList] = useState([]);
   const [newImage, setNewImage] = useState("");
@@ -54,25 +54,20 @@ const New = () => {
   //METHODS
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(manager);
-    if(!validateForm()){
-      ManagerService.addManager(manager).then(
-        () => {
-          alert("başarılı");
-        },
-        () => {
-          alert("başarısız");
-        }
-      );
-    }
-   
+    ManagerService.addManager(manager).then(
+      () => {
+        alert("başarılı");
+      },
+      (response) => {
+        alert(response.response.data.message);
+      }
+    );
   };
 
   const onChangeImage = (e) => {
     const file = e.target.files[0];
     setNewImage(file);
   };
-
 
   // Validations in the /utils/validatemanager class were used to catch errors
   const [errors, setErrors] = useState({});
@@ -81,7 +76,6 @@ const New = () => {
     setErrors(newErrors);
     return errors;
   };
-
 
   const handleSelect = (selectedOption) => {
     setSelectedOptions(selectedOption);
@@ -154,7 +148,7 @@ const New = () => {
                     setManager({ ...manager, firstName: e.target.value })
                   }
                 />
-                {errors.firstName&&<small>{errors.firstName}</small>}
+                {errors.firstName && <small>{errors.firstName}</small>}
               </div>
               <div className="formInput">
                 <label>Surname</label>
@@ -164,7 +158,7 @@ const New = () => {
                     setManager({ ...manager, surname: e.target.value })
                   }
                 />
-                {errors.surname&&<small>{errors.surname}</small>}
+                {errors.surname && <small>{errors.surname}</small>}
               </div>
               <div className="formInput">
                 <label>Birthday</label>
@@ -179,7 +173,7 @@ const New = () => {
                     })
                   }
                 />
-                {errors.birthDate&&<small>{errors.birthDate}</small>}
+                {errors.birthDate && <small>{errors.birthDate}</small>}
               </div>
               <div className="formInput">
                 <label>Date Of Employment</label>
@@ -194,7 +188,9 @@ const New = () => {
                     })
                   }
                 />
-                {errors.dateOfEmployment&&<small>{errors.dateOfEmployment}</small>}
+                {errors.dateOfEmployment && (
+                  <small>{errors.dateOfEmployment}</small>
+                )}
               </div>
               <div className="formInput">
                 <label>Birthday Place</label>
@@ -208,7 +204,7 @@ const New = () => {
                     })
                   }
                 />
-                {errors.birthdayPlace&&<small>{errors.birthdayPlace}</small>}
+                {errors.birthdayPlace && <small>{errors.birthdayPlace}</small>}
               </div>
               <div className="formInput">
                 <label>Identification Number</label>
@@ -221,7 +217,9 @@ const New = () => {
                     })
                   }
                 />
-                {errors.identificationNumber&&<small>{errors.identificationNumber}</small>}
+                {errors.identificationNumber && (
+                  <small>{errors.identificationNumber}</small>
+                )}
               </div>
               <div className="formInput">
                 <label>Phone</label>
@@ -231,7 +229,7 @@ const New = () => {
                     setManager({ ...manager, phone: e.target.value })
                   }
                 />
-                {errors.phone&&<small>{errors.phone}</small>}
+                {errors.phone && <small>{errors.phone}</small>}
               </div>
               <div className="formInput">
                 <label>Address</label>
@@ -241,7 +239,7 @@ const New = () => {
                     setManager({ ...manager, address: e.target.value })
                   }
                 />
-                {errors.address&&<small>{errors.address}</small>}
+                {errors.address && <small>{errors.address}</small>}
               </div>
               <button
                 onClick={(e) => {
