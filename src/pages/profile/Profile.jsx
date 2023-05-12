@@ -5,7 +5,7 @@ import AdminService from "../../service/AdminService";
 import { useEffect, useState, useRef } from "react";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
-
+import withAuth from "../../withAuth";
 const Profile = () => {
   const token = Cookies.get("token");
   const [admin, setAdmin] = useState({});
@@ -184,4 +184,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);
