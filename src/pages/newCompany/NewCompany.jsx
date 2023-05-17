@@ -39,6 +39,7 @@ const NewCompany = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(company);
     if (!validateForm()) {
       const date = new Date(company.contractStartYear);
       CompanyService.addCompany(company).then(
@@ -225,6 +226,7 @@ const NewCompany = () => {
                             .substring(0, 10),
                         })
                       }
+                      max={new Date().toISOString().substring(0, 10)}
                     />
                     {errors.yearOfEstablishment && (
                       <small>{errors.yearOfEstablishment}</small>
@@ -318,6 +320,12 @@ const NewCompany = () => {
                       ...company,
                       image: image,
                       phone: phone,
+                    });
+                  } else {
+                    setCompany({
+                      ...company,
+                      phone: phone,
+                      image: null,
                     });
                   }
                 }}

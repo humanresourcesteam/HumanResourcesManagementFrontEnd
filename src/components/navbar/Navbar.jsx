@@ -4,7 +4,7 @@ import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenOutlinedIcon from "@mui/icons-material/FullscreenOutlined";
 import { Link } from "react-router-dom";
-import DarkModeContext from "../../context/darkModeContext";
+
 import AdminService from "../../service/AdminService";
 import { useEffect, useState, useContext } from "react";
 import Cookies from "js-cookie";
@@ -21,10 +21,8 @@ const Navbar = () => {
     });
   }, []);
 
-  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
-
   return (
-    <div className={`navbar${darkMode ? " dark-mode" : ""}`}>
+    <div className="navbar">
       <div className="wrapper">
         {/* <div className="search">
           <input type="text" placeholder="Search..." />
@@ -39,7 +37,7 @@ const Navbar = () => {
             <FullscreenOutlinedIcon className="icon" />
           </div>
 
-          <div className="item" onClick={toggleDarkMode}>
+          <div className="item">
             <DarkModeOutlinedIcon className="icon" />
           </div>
           <Link to="/profile" style={{ textDecoration: "none" }}>

@@ -6,11 +6,10 @@ import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Tables";
 import WidgetNewEmployee from "../../components/widgetNewEmployee/WidgetNewEmployee";
 import { useContext } from "react";
-import DarkModeContext from "../../context/darkModeContext";
+
 import withAuth from "../../withAuth";
 
 const Home = () => {
-  const { darkMode } = useContext(DarkModeContext);
   return (
     <div className="home">
       <Sidebar />
@@ -27,9 +26,7 @@ const Home = () => {
           <Chart />
         </div>
         <div className="listContainer">
-          <div className={`listTitle${darkMode ? " dark-mode" : ""}`}>
-            All Employee
-          </div>
+          <div className="listTitle">All Employee</div>
           <Table />
         </div>
       </div>

@@ -9,15 +9,17 @@ import { useEffect, useState, useContext } from "react";
 import AdminService from "../../service/AdminService";
 import ManagerService from "../../service/ManagerService";
 import CompanyService from "../../service/CompanyService";
-import DarkModeContext from "../../context/darkModeContext";
+import WorkerService from "../../service/WorkerService";
+
 const Widget = ({ type }) => {
   let data;
   const token = Cookies.get("token");
-  const { darkMode } = useContext(DarkModeContext);
+
   // total number of admin
   const [adminCount, setAdminCount] = useState(0);
   const [managerCount, setManagerCount] = useState(0);
   const [companyCount, setCompanyCount] = useState(0);
+  const [workerCount, setWorkerCount] = useState(0);
   useEffect(() => {
     AdminService.getAllAdminCount(token).then((response) => {
       setAdminCount(response.data.length);
@@ -33,6 +35,12 @@ const Widget = ({ type }) => {
   useEffect(() => {
     CompanyService.getSummaryAllCompany().then((response) => {
       setCompanyCount(response.data.length);
+    });
+  }, []);
+
+  useEffect(() => {
+    WorkerService.getAllWorker().then((response) => {
+      setWorkerCount(response.data.length);
     });
   }, []);
 
@@ -52,9 +60,9 @@ const Widget = ({ type }) => {
       break;
     case "employee":
       data = {
-        title: "EMPLOYEE",
+        title: "TOTAL EMPLOYEE",
         link: "See all employee",
-        count: 0,
+        count: workerCount,
         icon: (
           <BadgeOutlinedIcon
             className="icon"
@@ -84,7 +92,7 @@ const Widget = ({ type }) => {
   }
 
   return (
-    <div className={`widget${darkMode ? " dark-mode" : ""}`}>
+    <div className="widget">
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">{data.count}</span>

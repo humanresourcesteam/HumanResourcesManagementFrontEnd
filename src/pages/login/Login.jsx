@@ -1,9 +1,9 @@
 import "./login.scss";
 import Bro from "../../assets/bro.svg";
 import AuthService from "../../service/AuthService";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Cookies from "js-cookie";
-
+import { UserContext } from "../../UserContext";
 const Login = () => {
   const [admin, setAdmin] = useState({
     email: "",
@@ -25,9 +25,9 @@ const Login = () => {
     e.preventDefault();
     AuthService.login(admin).then(
       (response) => {
-        console.log(response.data.token);
+        console.log(response);
         Cookies.set("token", response.data.token);
-
+        Cookies.set("erole", response.data.erole);
         window.location.replace("/");
       },
       () => {

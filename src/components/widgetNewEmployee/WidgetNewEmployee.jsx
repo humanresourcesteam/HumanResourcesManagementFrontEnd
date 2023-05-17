@@ -4,7 +4,7 @@ import ManagerService from "../../service/ManagerService";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import DarkModeContext from "../../context/darkModeContext";
+
 const WidgetNewEmployee = () => {
   const [widgetmanager, setWidgetmanager] = useState([
     {
@@ -14,12 +14,12 @@ const WidgetNewEmployee = () => {
       email: "",
     },
   ]);
-  const { darkMode } = useContext(DarkModeContext);
+
   useEffect(() => {
     console.log("useEffect runs");
 
     axios
-      .get("http://34.173.89.16/manager/find-five-manager")
+      .get("http://localhost:9092/api/v1/manager/find-five-manager")
       .then((response) => {
         setWidgetmanager([...response.data]);
       });
@@ -28,7 +28,7 @@ const WidgetNewEmployee = () => {
     };
   }, []);
   return (
-    <div className={`widgetNew${darkMode ? " dark-mode" : ""}`}>
+    <div className="widgetNew">
       <span className="widgetSmTitle">New Join Employee</span>
       <ul className="widgetSmList">
         {widgetmanager.map((employee, index) => (
