@@ -7,9 +7,6 @@ import Table from "../../components/table/Tables";
 import WidgetNewEmployee from "../../components/widgetNewEmployee/WidgetNewEmployee";
 import { useContext } from "react";
 import DarkModeContext from "../../context/darkModeContext";
-import Sidebar from""
-
-
 import withAuth from "../../withAuth";
 
 const Home = () => {
