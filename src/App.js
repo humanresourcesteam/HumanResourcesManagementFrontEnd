@@ -14,7 +14,7 @@ import { useEffect, useState, useContext } from "react";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <BrowserRouter>
         <Routes>
           <Route path="/">

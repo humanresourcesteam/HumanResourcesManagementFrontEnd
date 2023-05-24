@@ -4,7 +4,7 @@ import ManagerService from "../../service/ManagerService";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import PersonDenem from "../../assets/3d-casual-life-young-man-in-headphones-sitting-with-laptop-and-waving.png";
 const WidgetNewEmployee = () => {
   const [widgetmanager, setWidgetmanager] = useState([
     {
@@ -29,30 +29,32 @@ const WidgetNewEmployee = () => {
   }, []);
   return (
     <div className="widgetNew">
-      <span className="widgetSmTitle">New Join Employee</span>
-      <ul className="widgetSmList">
-        {widgetmanager.map((employee, index) => (
-          <li key={index} className="widgetSmListItem">
-            <img src={employee.image} alt="" className="widgetSmImg" />
-            <div className="widgetSmEmployee">
-              <span className="widgetUsername">
-                {employee.firstName} {employee.surname}
-              </span>
-              <span className="widgetUserTitle">Software Developer</span>
-            </div>
-            <Link
-              className="links"
-              to={"/manager/" + employee.id}
-              style={{ textDecoration: "none" }}
-            >
-              <button className="widgetSmButton">
-                <VisibilityIcon className="widgetSmIcon" />
-                Display
-              </button>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <p className="widgetNew-p">New Join Manager</p>
+      {widgetmanager.map((employee, index) => (
+        <div className="person-area">
+          <img
+            src={PersonDenem}
+            alt="employee-image"
+            className="employee-icon"
+          />
+          <div className="info-employee">
+            <p className="name-employee">
+              {" "}
+              {employee.firstName} {employee.surname}
+            </p>
+            <p className="title-employee">Software Developer</p>
+          </div>
+          <Link
+            className="links"
+            to={"/manager/" + employee.id}
+            style={{ textDecoration: "none" }}
+          >
+            <button className="widgetSmButton">
+              <VisibilityIcon className="widgetSmIcon" />
+            </button>
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };

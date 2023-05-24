@@ -32,20 +32,23 @@ const Profile = () => {
     setImage(file);
   };
   useEffect(() => {
-    AdminService.getAllAdminInfo(token).then((response) => {
-      console.log(response);
-      setAdmin((admin) => ({
-        ...admin,
-        ...response.data,
-      }));
-      setDate(response.data.dateOfEmployment);
-      console.log(response.data.dateOfEmployment);
-      setEmail(response.data.email);
-      setFirstName(response.data.firstName);
-      setSurname(response.data.surname);
-      setRole(response.data.role);
-    });
-  }, []);
+    if (token) {
+      AdminService.getAllAdminInfo(token).then((response) => {
+        console.log(response);
+        setAdmin((admin) => ({
+          ...admin,
+          ...response.data,
+        }));
+        setDate(response.data.dateOfEmployment);
+        console.log(response.data.dateOfEmployment);
+        setEmail(response.data.email);
+        setFirstName(response.data.firstName);
+        setSurname(response.data.surname);
+        setRole(response.data.role);
+      });
+    }
+  }, [token]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(data);
@@ -67,7 +70,7 @@ const Profile = () => {
           title: "Signed in successfully",
         });
 
-        window.location.reload(true);
+        // window.location.reload(true);
       },
       () => {
         Swal.fire({

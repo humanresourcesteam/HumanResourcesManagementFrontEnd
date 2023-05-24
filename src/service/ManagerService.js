@@ -1,17 +1,15 @@
 import axios from "axios";
 
-const GET_ALL_MANAGER_SUMMARY_INFO =
-  "http://localhost:9092/api/v1/manager/get-all-summary";
+const GET_ALL_MANAGER_SUMMARY_INFO = "http://localhost/manager/get-all-summary";
 
-const GET_INFO_MANAGER_WITH_ID =
-  "http://localhost:9092/api/v1/manager/manager/";
+const GET_INFO_MANAGER_WITH_ID = "http://localhost/manager/manager/";
 
-const ADD_MANAGER = "http://localhost:9092/api/v1/manager/add";
+const ADD_MANAGER = "http://localhost/manager/add";
 
-const GET_5_MANAGER = "http://localhost:9092/api/v1/manager/find-five-manager";
+const GET_5_MANAGER = "http://localhost/manager/find-five-manager";
 
 const MANAGER_INFO_FOR_COMPANY =
-  "http://localhost:9092/api/v1/manager/manager-company-info/";
+  "http://localhost/manager/manager-company-info/";
 
 class ManagerService {
   getAllAdminSummaryInfo() {

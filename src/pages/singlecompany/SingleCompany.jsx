@@ -83,18 +83,29 @@ const SingleCompany = () => {
     shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
   });
   useEffect(() => {
-    CompanyService.getInfoForCompanyId(params.companyId).then((response) => {
-      setCompany({ ...response.data });
-    });
-  }, []);
-  useEffect(() => {
-    ManagerService.getManagerInfoForCompany(params.companyId).then(
-      (response) => {
-        setManager({ ...response.data });
-      }
-    );
-  }, []);
+    if (params.companyId) {
+      CompanyService.getInfoForCompanyId(params.companyId)
+        .then((response) => {
+          setCompany({ ...response.data });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [params.companyId]);
 
+  useEffect(() => {
+    if (params.companyId) {
+      ManagerService.getManagerInfoForCompany(params.companyId)
+        .then((response) => {
+          setManager({ ...response.data });
+        })
+        .catch((error) => {
+          console.error(error);
+          // Handle the error as necessary
+        });
+    }
+  }, [params.companyId]);
   return (
     <div className="single">
       <Sidebar />

@@ -1,90 +1,124 @@
 import "./widget.scss";
-import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
-
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import AccessibilityNewOutlinedIcon from "@mui/icons-material/AccessibilityNewOutlined";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import { useState, useEffect } from "react";
+import withAuth from "../../withAuth";
+import Expenses from "../../assets/expenses.png";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
+import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
+import TabOutlinedIcon from "@mui/icons-material/TabOutlined";
+import ProjectImage from "../../assets/3d-casual-life-sheets-of-documents.png";
+import WalletImage from "../../assets/3d-casual-life-wallet-with-banknots-credit-card-and-coins.png";
+import MoneyImage from "../../assets/3d-casual-life-open-safe-box-blue.png";
+import SickImage from "../../assets/3d-casual-life-medical-history-pills.png";
+import axios from "axios";
 import Cookies from "js-cookie";
-import { useEffect, useState, useContext } from "react";
-import AdminService from "../../service/AdminService";
-import ManagerService from "../../service/ManagerService";
-import CompanyService from "../../service/CompanyService";
 import WorkerService from "../../service/WorkerService";
+import PermissionService from "../../service/PermissionService";
+import AdvanceService from "../../service/AdvanceService";
+import ExpenseService from "../../service/ExpenseService";
+
+const useFetchData = (token) => {
+  const [worker, setWorker] = useState({});
+  const [listPermission, setListPermission] = useState([{}]);
+  const [listAdvance, setListAdvances] = useState([{}]);
+  const [expense, setExpense] = useState({});
+
+  const fetchData = async () => {
+    const source = axios.CancelToken.source();
+
+    try {
+      const workerResponse = await WorkerService.getInfoForWorker(token, {
+        cancelToken: source.token,
+      });
+      setWorker(workerResponse.data);
+
+      if (workerResponse.data.id) {
+        const permissionResponse =
+          await PermissionService.getPermissionForWorker(
+            workerResponse.data.id,
+            { cancelToken: source.token }
+          );
+        setListPermission(permissionResponse.data);
+
+        const advanceResponse = await AdvanceService.getAllAdvances(
+          workerResponse.data.id
+        );
+        setListAdvances([...advanceResponse.data]);
+
+        const expenseResponse = await ExpenseService.getallexpense(
+          workerResponse.data.id
+        );
+        setExpense([...expenseResponse.data]);
+      }
+    } catch (error) {
+      if (!axios.isCancel(error)) {
+        // Handle the error here
+      }
+    } finally {
+      source.cancel();
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [token]);
+
+  return { worker, listPermission, listAdvance, expense };
+};
 
 const Widget = ({ type }) => {
-  let data;
   const token = Cookies.get("token");
-
-  // total number of admin
-  const [adminCount, setAdminCount] = useState(0);
-  const [managerCount, setManagerCount] = useState(0);
-  const [companyCount, setCompanyCount] = useState(0);
-  const [workerCount, setWorkerCount] = useState(0);
-  useEffect(() => {
-    AdminService.getAllAdminCount(token).then((response) => {
-      setAdminCount(response.data.length);
-    });
-  }, []);
-
-  useEffect(() => {
-    ManagerService.getAllAdminSummaryInfo().then((response) => {
-      setManagerCount(response.data.length);
-    });
-  }, []);
-
-  useEffect(() => {
-    CompanyService.getSummaryAllCompany().then((response) => {
-      setCompanyCount(response.data.length);
-    });
-  }, []);
-
-  useEffect(() => {
-    WorkerService.getAllWorker().then((response) => {
-      setWorkerCount(response.data.length);
-    });
-  }, []);
-
+  const { worker, listPermission, listAdvance, expense } = useFetchData(token);
+  let data;
   switch (type) {
-    case "manager":
-      data = {
-        title: "MANAGER",
-        link: "See all manager",
-        count: managerCount,
-        icon: (
-          <ManageAccountsOutlinedIcon
-            className="icon"
-            style={{ color: "crimson", backgroundColor: "rgba(255,0,0,0.2)" }}
-          />
-        ),
-      };
-      break;
-    case "employee":
-      data = {
-        title: "TOTAL EMPLOYEE",
-        link: "See all employee",
-        count: workerCount,
-        icon: (
-          <BadgeOutlinedIcon
-            className="icon"
-            style={{
-              backgroundColor: " rgba(0, 128, 0, 0.20)",
-              color: "green",
-            }}
-          />
-        ),
-      };
-      break;
     case "total":
       data = {
+        title: "TOTAL EMPLOYEE",
+        link: "See all manager",
+        class: "total",
+        count: 1,
+        icon: <img className="widget-imga" src={ProjectImage} alt="" />,
+        background: "#dad7f4",
+      };
+      break;
+
+    case "retired":
+      data = {
+        title: "TOTAL MANAGER",
+        link: "See all employee",
+        class: "active",
+        count: 3,
+        icon: <img src={SickImage} className="widget-img" />,
+        background: "#fcd4c8",
+      };
+      break;
+    case "laik":
+      data = {
         title: "TOTAL COMPANY",
+        link: "See all employee",
+        class: "active",
+        count: 2,
+        icon: <img src={MoneyImage} className="widget-img" />,
+        background: "#fef4de",
+      };
+      break;
+    case "active":
+      data = {
+        title: "TOTAL ADMIN",
         link: "See all total company",
-        count: companyCount,
+        count: 1,
+        class: "active",
         icon: (
-          <AccessibilityNewOutlinedIcon
-            className="icon"
-            style={{ color: "#0b2447" }}
+          <img
+            src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705818/3d-casual-life-wallet-with-banknots-credit-card-and-coins_zaonun.png"
+            className="widget-img"
+            alt=""
           />
         ),
+        background: "#d1eeea",
       };
       break;
     default:
@@ -92,21 +126,14 @@ const Widget = ({ type }) => {
   }
 
   return (
-    <div className="widget">
-      <div className="left">
-        <span className="title">{data.title}</span>
-        <span className="counter">{data.count}</span>
-        <span className="link">{data.link}</span>
-      </div>
-      <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpOutlinedIcon />
-          20%
-        </div>
-        {data.icon}
+    <div className="widget" style={{ backgroundColor: data.background }}>
+      <div className="widget__right">{data.icon}</div>
+      <div className="widget__left">
+        <span className="widget__counter">{data.count}</span>
+        <span className="widget__title">{data.title}</span>
       </div>
     </div>
   );
 };
 
-export default Widget;
+export default withAuth(Widget);

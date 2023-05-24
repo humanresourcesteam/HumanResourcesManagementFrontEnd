@@ -19,19 +19,11 @@ const Datatable = () => {
     },
   ]);
 
-  // AXIOS ILE SILME IŞLEMİ YAPILIRKEN BURASI DÜZENLENECEK
-  const handleDelete = (id) => {
-    setManager(manager.filter((item) => item.id !== id));
-  };
-
   useEffect(() => {
-    console.log("useEffect runs");
     ManagerService.getAllAdminSummaryInfo().then((response) => {
       setManager([...response.data]);
     });
-    return () => {
-      console.log("useEffect clean-up");
-    };
+    return () => {};
   }, []);
 
   const actionColumn = [
@@ -51,12 +43,6 @@ const Datatable = () => {
                 <span>View Profile</span>
               </Link>
             </div>
-            {/* <div className="delete">
-              <DeleteOutlineOutlinedIcon
-                className="icon"
-                onClick={() => handleDelete(params.row.id)}
-              />
-            </div> */}
           </div>
         );
       },

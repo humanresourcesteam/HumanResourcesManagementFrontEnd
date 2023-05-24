@@ -1,0 +1,19 @@
+.salary {
+  flex: 1.65;
+  padding: 10px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  height: 350px;
+  background-color: #fafafe;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.salary-p {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d3354;
+  text-align: center;
+}

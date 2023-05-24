@@ -1,0 +1,38 @@
+.avarage {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+  flex: 1;
+  padding: 10px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  height: 150px;
+  background-color: #fafafe;
+
+  .avarage-div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .star-icon {
+    width: 60px;
+    height: auto;
+  }
+  .avarage-math {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1d3354;
+  }
+}
+
+.title-avarage {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d3354;
+  text-align: center;
+}

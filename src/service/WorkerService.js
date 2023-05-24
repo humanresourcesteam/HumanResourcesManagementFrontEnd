@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const GET_COUNT_EMPLOYEE =
-  "http://localhost:9093/api/v1/workers/get-new-employee";
+const GET_COUNT_EMPLOYEE = "http://localhost/workers/get-new-employee";
 
 class WorkerService {
   getAllWorker() {

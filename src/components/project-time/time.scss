@@ -1,0 +1,37 @@
+.project-time {
+  background-color: white;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  flex: 1;
+}
+.project-time-second-area {
+  width: 250px;
+}
+.project-time-day-area {
+  text-align: center;
+  color: #247ba0;
+  font-weight: 600;
+}
+.project-launch-h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d3354;
+  text-align: center;
+}
+.project-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.project-side-table {
+  margin-top: 20px;
+  flex: 2;
+}

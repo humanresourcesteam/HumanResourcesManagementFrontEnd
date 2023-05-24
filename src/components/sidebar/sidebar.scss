@@ -19,25 +19,16 @@
 }
 
 .sidebar {
-  flex: 0.8;
-  border-right: 0.5px solid rgb(233, 232, 232);
+  border-right: 1px solid rgb(233, 232, 232);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  background-color: white;
-}
-
-.sidebar.dark-mode {
-  background-color: var(--dark-light-color);
-  border-right: 0.5px solid var(--dark-first-color);
-  color: var(--dark-text-color);
 }
 
 hr {
   height: 0;
   border: 0.5px solid rgb(233, 232, 232);
-}
-
-.sidebar.dark-mode hr {
-  border: 0.5px solid var(--dark-first-color);
 }
 
 .top {

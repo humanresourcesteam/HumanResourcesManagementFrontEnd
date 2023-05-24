@@ -1,107 +1,56 @@
-:root {
-  /* Light mode variables */
-  /* ... */
-  --widgetNew-bg-color: white;
-  --widgetNew-shadow-color: rgba(201, 201, 201, 0.47);
-  --widgetNew-title-color: #467599;
-  --widgetNew-button-bg-color: #eeeef7;
-  --widgetNew-button-text-color: #555;
-
-  /* Dark mode variables */
-  /* ... */
-  --dark-widgetNew-bg-color: #121212;
-  --dark-widgetNew-shadow-color: rgba(95, 94, 94, 0.664);
-  --dark-widgetNew-title-color: #e2dafc;
-  --dark-widgetNew-button-bg-color: #4d4d4db7;
-  --dark-widgetNew-button-text-color: white;
-}
-
 .widgetNew {
-  flex: 2;
+  flex: 0.93;
+  padding: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-  border-radius: 15px;
-  padding: 10px;
-  .widgetSmTitle {
-    font-size: 22px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fafafe;
+
+  .widgetNew-p {
+    font-size: 18px;
     font-weight: 600;
-    color: #467599;
+    color: #1d3354;
+    text-align: center;
   }
-  .widgetSmImg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .widgetSmList {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    .widgetSmListItem {
+  .person-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    max-height: 100px;
+    border-radius: 5%;
+
+    .employee-icon {
+      width: 40px;
+      height: auto;
+    }
+    .info-employee {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 20px 0px;
-      gap: 35px;
-
-      .widgetSmEmployee {
-        display: flex;
-        flex-direction: column;
-
-        .widgetUsername {
-          font-weight: 600;
-        }
-        .widgetUserTitle {
-          font-weight: 300;
-        }
-      }
-      .widgetSmButton {
-        display: flex;
-        align-items: center;
-        border: none;
-        border-radius: 10px;
-        padding: 7px 10px;
-        background-color: #eeeef7;
-        color: #555;
-        cursor: pointer;
-      }
-
-      .widgetSmIcon {
+      flex-direction: column;
+      justify-content: flex-start;
+      .name-employee {
         font-size: 16px;
+        font-weight: 500;
+      }
+      .title-employee {
+        font-size: 12px;
+        font-weight: 400;
       }
     }
   }
-}
-
-.widgetNew {
-  /* ... */
-  background-color: var(--widgetNew-bg-color);
-  box-shadow: 2px 4px 10px 1px var(--widgetNew-shadow-color);
-  /* ... */
-
-  .widgetSmTitle {
-    /* ... */
-    color: var(--widgetNew-title-color);
-  }
-
   .widgetSmButton {
-    /* ... */
-    background-color: var(--widgetNew-button-bg-color);
-    color: var(--widgetNew-button-text-color);
-    /* ... */
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    padding: 7px 10px;
+
+    color: #555;
+    cursor: pointer;
   }
-}
-
-.widgetNew.dark-mode {
-  background-color: var(--dark-widgetNew-bg-color);
-  box-shadow: 2px 4px 10px 1px var(--dark-widgetNew-shadow-color);
-
-  .widgetSmTitle {
-    color: var(--dark-widgetNew-title-color);
-  }
-
-  .widgetSmButton {
-    background-color: var(--dark-widgetNew-button-bg-color);
-    color: var(--dark-widgetNew-button-text-color);
+  .widgetSmIcon {
+    font-size: 16px;
   }
 }
