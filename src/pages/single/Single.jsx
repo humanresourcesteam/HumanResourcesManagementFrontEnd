@@ -8,9 +8,7 @@ import withAuth from "../../withAuth";
 
 const Single = () => {
   let params = useParams();
-
   const [manager, setManager] = useState({});
-
   useEffect(() => {
     ManagerService.getInfoForManagerWithId(params.managerId).then(
       (response) => {

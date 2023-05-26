@@ -23,7 +23,7 @@ const Best = () => {
         <div className="project-time-second-areas" ref={container}></div>
       </div>
       <div className="project-side-table">
-        <ProjectList />
+        <BestEmployee />
       </div>
     </div>
   );

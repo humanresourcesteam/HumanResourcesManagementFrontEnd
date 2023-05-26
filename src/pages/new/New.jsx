@@ -9,6 +9,7 @@ import CompanyService from "../../service/CompanyService";
 import { useNavigate, useLocation } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 import { validateManagerForm } from "../../utils/validatemanager";
+
 const New = () => {
   const [optionList, setOptionList] = useState([]);
   const [newImage, setNewImage] = useState("");
@@ -57,9 +58,14 @@ const New = () => {
     ManagerService.addManager(manager).then(
       () => {
         alert("başarılı");
+        window.location.replace("/");
       },
       (response) => {
-        alert(response.response.data.message);
+        if (response.response.status === 405) {
+          window.location.replace("/");
+        } else {
+          alert(response.response.data.message);
+        }
       }
     );
   };
@@ -84,7 +90,6 @@ const New = () => {
       history("/company/new", { state: { companyName: selectedOption.value } });
     }
   };
-  const [isClearable, setIsClearable] = useState(true);
 
   return (
     <div className="new">

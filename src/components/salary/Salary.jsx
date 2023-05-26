@@ -1,4 +1,5 @@
 import "./salary.scss";
+import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -8,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-const Salary = () => {
+const Salary = ({ className, isSidebarVisible }) => {
   const data = [
     {
       name: "Feb",
@@ -54,7 +55,7 @@ const Salary = () => {
     },
   ];
   return (
-    <div className="salary">
+    <div className={`salary ${className}`}>
       <p className="salary-p">Income and Expenditure Statement</p>
       <BarChart width={900} height={330} data={data}>
         <CartesianGrid strokeDasharray="0.2 0.2" />

@@ -12,6 +12,7 @@ import Table from "../../components/table/Tables";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import CompanyService from "../../service/CompanyService";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import {
   AreaChart,
@@ -73,7 +74,7 @@ const SingleCompany = () => {
   ];
 
   const [contractsDays, setContractsDays] = useState(0);
-  const [remaininDays, setRemainingDays] = useState(0);
+  const [remainingDays, setRemainingDays] = useState(0);
 
   const [manager, setManager] = useState({});
   delete L.Icon.Default.prototype._getIconUrl;
@@ -82,6 +83,7 @@ const SingleCompany = () => {
     iconUrl: require("leaflet/dist/images/marker-icon.png"),
     shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
   });
+
   useEffect(() => {
     if (params.companyId) {
       CompanyService.getInfoForCompanyId(params.companyId)
@@ -102,10 +104,10 @@ const SingleCompany = () => {
         })
         .catch((error) => {
           console.error(error);
-          // Handle the error as necessary
         });
     }
   }, [params.companyId]);
+
   return (
     <div className="single">
       <Sidebar />
@@ -191,11 +193,7 @@ const SingleCompany = () => {
                   <div className="manager-info-companys">
                     <div className="input-form">
                       <label htmlFor="">Manager Name</label>
-                      <input
-                        type="text"
-                        value={manager.firstName + " " + manager.surname}
-                        disabled
-                      />
+                      <input type="text" value={manager.firstName} disabled />
                     </div>
                     <div className="input-form">
                       <label htmlFor="">Manager Email</label>
@@ -217,9 +215,9 @@ const SingleCompany = () => {
                   <CircularProgressbar
                     strokeWidth={1}
                     value={
-                      (company.allContractDay -
-                        (company.allContractDay - company.remainingDays) /
-                          contractsDays) *
+                      ((company.allContractDay -
+                        (company.allContractDay - company.remainingDays)) /
+                        contractsDays) *
                       100
                     }
                     text={`${
@@ -229,14 +227,12 @@ const SingleCompany = () => {
                     styles={buildStyles({
                       rotation: 0.25,
                       strokeLinecap: "butt",
-
                       textSize: "16px",
-
                       pathTransitionDuration: 0.5,
-
                       pathColor: `rgba(62, 152, 199, ${
-                        company.allContractDay -
-                        (company.allContractDay - company.remainingDays)
+                        (company.allContractDay -
+                          (company.allContractDay - company.remainingDays)) /
+                        contractsDays
                       })`,
                       textColor: "#f88",
                       trailColor: "#d6d6d6",
@@ -271,12 +267,12 @@ const SingleCompany = () => {
                 </div>
               </div>
             </div>
-            <div className="bottom-bot-bottom">
+            {/* <div className="bottom-bot-bottom">
               <div className="employeelist">
                 <h2>Employee List</h2>
                 <Table />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ const Datatable = () => {
           <div className="cellAction">
             <div className="view">
               <Link
-                className="links"
+                className="linksecompany"
                 to={"/manager/" + params.row.id}
                 style={{ textDecoration: "none" }}
               >
@@ -52,13 +52,12 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="dataTableTitle">
-        <Link to="/manager/new" className="link">
-          Add new manager
+        <Link to="/manager/new" className="links">
+          <span>Add new manager </span>
         </Link>
       </div>
+
       <DataGrid
-        style={{ fontWeight: "700" }}
-        className="datagrid"
         rows={manager}
         columns={managerColumns.concat(actionColumn)}
         rowHeight={100}

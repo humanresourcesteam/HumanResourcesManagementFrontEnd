@@ -3,10 +3,13 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Datatable from "../../components/datatable/Datatable";
 import withAuth from "../../withAuth";
+import { SidebarContext } from "../../context/SidebarContext";
+import { useContext } from "react";
 const List = () => {
+  const { isSidebarVisible } = useContext(SidebarContext);
   return (
     <div className="list">
-      <Sidebar />
+      {isSidebarVisible && <Sidebar />}
       <div className="listContainer">
         <Navbar />
         <Datatable />

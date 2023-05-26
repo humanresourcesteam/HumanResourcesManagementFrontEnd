@@ -7,10 +7,9 @@
 
 .new {
   width: 100%;
-  margin: 0 auto;
-  display: flex;
+
   .newContainer {
-    flex: 7;
+    flex: 9;
     .top,
     .bottom {
       -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);

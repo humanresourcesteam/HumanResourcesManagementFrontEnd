@@ -23,8 +23,10 @@
     border-radius: 5%;
 
     .employee-icon {
-      width: 40px;
-      height: auto;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
     }
     .info-employee {
       display: flex;

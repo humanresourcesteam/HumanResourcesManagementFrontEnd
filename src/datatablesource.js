@@ -1,9 +1,8 @@
 export const managerColumns = [
-  { field: "id", headerName: "ID", width: 250 },
   {
     field: "image",
     headerName: "Image",
-    width: 150,
+    width: 180,
     renderCell: (param) => {
       return (
         <div className="cellWithImg">
@@ -14,8 +13,8 @@ export const managerColumns = [
   },
   { field: "firstName", headerName: "Firstname", width: 200 },
   { field: "surname", headerName: "Surname", width: 200 },
-  { field: "phone", headerName: "Phone", width: 200 },
-  { field: "email", headerName: "Email", width: 200 },
+  { field: "phone", headerName: "Phone", width: 230 },
+  { field: "email", headerName: "Email", width: 230 },
   { field: "address", headerName: "Address", width: 350 },
 ];
 

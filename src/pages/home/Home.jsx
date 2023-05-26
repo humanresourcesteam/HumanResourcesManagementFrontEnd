@@ -16,16 +16,15 @@ import Maps from "../../components/maps/Maps";
 import BestEmployee from "../../components/bestEmployee/BestEmployee";
 import ProjectTime from "../../components/project-time/ProjectTime";
 import Best from "../../components/best-list/Best";
-
+import { SidebarContext } from "../../context/SidebarContext";
 const Home = () => {
+  const { isSidebarVisible } = useContext(SidebarContext);
   return (
     <div className="home">
-      <Sidebar />
-
-      {/* HOME CONTAINER */}
+      {isSidebarVisible && <Sidebar />}
       <div className="homeContainer">
         <Navbar />
-        {/* <Welcome /> */}
+        <Welcome />
         <div className="widgets">
           <Widget type="active" />
           <Widget type="retired" />
@@ -34,12 +33,12 @@ const Home = () => {
         </div>
         <div className="charts">
           <WidgetNewEmployee />
-          <Salary />
+          <Salary className={isSidebarVisible ? "" : "salary-expanded"} />
           <Maps />
         </div>
         <div className="charts">
-          <ProjectTime />
           <Best />
+          <ProjectTime />
         </div>
       </div>
     </div>

@@ -39,7 +39,6 @@ const NewCompany = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(company);
     if (!validateForm()) {
       const date = new Date(company.contractStartYear);
       CompanyService.addCompany(company).then(
@@ -52,8 +51,12 @@ const NewCompany = () => {
           }
           navigate("/company");
         },
-        () => {
-          alert("başarısız");
+        (response) => {
+          if (response.response.status === 405) {
+            window.location.replace("/");
+          } else {
+            alert(response.response.data.message);
+          }
         }
       );
     }
@@ -299,12 +302,10 @@ const NewCompany = () => {
                     <input
                       type="text"
                       onChange={(e) =>
-                        console.log(
-                          setCompany({
-                            ...company,
-                            numberOfWorkers: e.target.value,
-                          })
-                        )
+                        setCompany({
+                          ...company,
+                          numberOfWorkers: e.target.value,
+                        })
                       }
                     />
                     {errors.numberOfWorkers && (

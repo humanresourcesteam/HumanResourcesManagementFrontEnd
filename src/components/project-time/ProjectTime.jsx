@@ -2,6 +2,7 @@ import "./time.scss";
 import lottie from "lottie-web";
 import { useEffect, useRef } from "react";
 import BestEmployee from "../bestEmployee/BestEmployee";
+import ProjectList from "../project-list/ProjectList";
 
 const ProjectTime = () => {
   const container = useRef(null);
@@ -19,11 +20,11 @@ const ProjectTime = () => {
   }, []);
   return (
     <div className="project-time">
-      <div className="project-side">
+      {/* <div className="project-side">
         <div className="project-time-second-area" ref={container}></div>
-      </div>
+      </div> */}
       <div className="project-side-table">
-        <BestEmployee />
+        <ProjectList />
       </div>
     </div>
   );

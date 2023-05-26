@@ -47,7 +47,6 @@ const BestEmployee = () => {
             <th>Name</th>
 
             <th>Jobs</th>
-            <th>Avarage Score</th>
           </tr>
         </thead>
         <tbody>
@@ -56,7 +55,6 @@ const BestEmployee = () => {
               <td>{item.name}</td>
 
               <td>{item.jobs}</td>
-              <td>{item.avaragescore}</td>
             </tr>
           ))}
         </tbody>

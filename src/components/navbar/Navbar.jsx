@@ -4,13 +4,15 @@ import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import FullscreenOutlinedIcon from "@mui/icons-material/FullscreenOutlined";
 import { Link } from "react-router-dom";
-
+import MenuIcon from "@mui/icons-material/Menu";
 import AdminService from "../../service/AdminService";
 import { useEffect, useState, useContext } from "react";
 import Cookies from "js-cookie";
+import { SidebarContext } from "../../context/SidebarContext";
+
 const Navbar = () => {
   const [admin, setAdmin] = useState({});
-
+  const { toggleSidebar } = useContext(SidebarContext);
   const token = Cookies.get("token");
   useEffect(() => {
     AdminService.getAllAdminInfo(token).then((response) => {
@@ -24,10 +26,9 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="wrapper">
-        {/* <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlinedIcon className="icon" />
-        </div> */}
+        <div>
+          <MenuIcon className="icon" onClick={toggleSidebar}></MenuIcon>
+        </div>
         <div className="items">
           <div className="item">
             <LanguageOutlinedIcon className="icon" />

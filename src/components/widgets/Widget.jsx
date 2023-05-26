@@ -19,40 +19,42 @@ import WorkerService from "../../service/WorkerService";
 import PermissionService from "../../service/PermissionService";
 import AdvanceService from "../../service/AdvanceService";
 import ExpenseService from "../../service/ExpenseService";
-
+import Gold from "../../assets/casual-life-3d-yellow-dollar-coin-1.png";
+import ManagerService from "../../service/ManagerService";
+import CompanyService from "../../service/CompanyService";
+import AdminIcon from "../../assets/man.png";
+import ManagerIcon from "../../assets/3d-casual-life-young-man-in-headphones-sitting-with-laptop-and-waving.png";
 const useFetchData = (token) => {
-  const [worker, setWorker] = useState({});
-  const [listPermission, setListPermission] = useState([{}]);
-  const [listAdvance, setListAdvances] = useState([{}]);
-  const [expense, setExpense] = useState({});
+  const [worker, setWorker] = useState();
+  const [listPermission, setListPermission] = useState(0);
+  const [listAdvance, setListAdvances] = useState(0);
+  const [expense, setExpense] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get("http://34.173.89.16/manager/get-all-summary")
+      .then((response) => {
+        setListAdvances([...response.data]);
+      });
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("http://34.173.89.16/company/get-all-summary")
+      .then((response) => {
+        setListPermission([...response.data]);
+      });
+    return () => {};
+  }, []);
 
   const fetchData = async () => {
     const source = axios.CancelToken.source();
 
     try {
-      const workerResponse = await WorkerService.getInfoForWorker(token, {
+      const workerResponse = await WorkerService.getAllWorker({
         cancelToken: source.token,
       });
-      setWorker(workerResponse.data);
-
-      if (workerResponse.data.id) {
-        const permissionResponse =
-          await PermissionService.getPermissionForWorker(
-            workerResponse.data.id,
-            { cancelToken: source.token }
-          );
-        setListPermission(permissionResponse.data);
-
-        const advanceResponse = await AdvanceService.getAllAdvances(
-          workerResponse.data.id
-        );
-        setListAdvances([...advanceResponse.data]);
-
-        const expenseResponse = await ExpenseService.getallexpense(
-          workerResponse.data.id
-        );
-        setExpense([...expenseResponse.data]);
-      }
     } catch (error) {
       if (!axios.isCancel(error)) {
         // Handle the error here
@@ -72,6 +74,7 @@ const useFetchData = (token) => {
 const Widget = ({ type }) => {
   const token = Cookies.get("token");
   const { worker, listPermission, listAdvance, expense } = useFetchData(token);
+
   let data;
   switch (type) {
     case "total":
@@ -79,7 +82,7 @@ const Widget = ({ type }) => {
         title: "TOTAL EMPLOYEE",
         link: "See all manager",
         class: "total",
-        count: 1,
+        count: worker,
         icon: <img className="widget-imga" src={ProjectImage} alt="" />,
         background: "#dad7f4",
       };
@@ -90,8 +93,8 @@ const Widget = ({ type }) => {
         title: "TOTAL MANAGER",
         link: "See all employee",
         class: "active",
-        count: 3,
-        icon: <img src={SickImage} className="widget-img" />,
+        count: listAdvance.length,
+        icon: <img src={ManagerIcon} className="widget-img" />,
         background: "#fcd4c8",
       };
       break;
@@ -100,7 +103,7 @@ const Widget = ({ type }) => {
         title: "TOTAL COMPANY",
         link: "See all employee",
         class: "active",
-        count: 2,
+        count: listPermission.length,
         icon: <img src={MoneyImage} className="widget-img" />,
         background: "#fef4de",
       };
@@ -111,13 +114,7 @@ const Widget = ({ type }) => {
         link: "See all total company",
         count: 1,
         class: "active",
-        icon: (
-          <img
-            src="https://res.cloudinary.com/dl7h6kct3/image/upload/c_thumb,w_200,g_face/v1684705818/3d-casual-life-wallet-with-banknots-credit-card-and-coins_zaonun.png"
-            className="widget-img"
-            alt=""
-          />
-        ),
+        icon: <img src={AdminIcon} className="widget-img" alt="" />,
         background: "#d1eeea",
       };
       break;

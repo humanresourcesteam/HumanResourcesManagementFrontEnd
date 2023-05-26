@@ -6,7 +6,10 @@ import { useEffect, useState, useRef } from "react";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import withAuth from "../../withAuth";
+import { SidebarContext } from "../../context/SidebarContext";
+import { useContext } from "react";
 const Profile = () => {
+  const { isSidebarVisible } = useContext(SidebarContext);
   const token = Cookies.get("token");
   const [admin, setAdmin] = useState({});
   const inputFileRef = useRef(null);
@@ -34,13 +37,11 @@ const Profile = () => {
   useEffect(() => {
     if (token) {
       AdminService.getAllAdminInfo(token).then((response) => {
-        console.log(response);
         setAdmin((admin) => ({
           ...admin,
           ...response.data,
         }));
         setDate(response.data.dateOfEmployment);
-        console.log(response.data.dateOfEmployment);
         setEmail(response.data.email);
         setFirstName(response.data.firstName);
         setSurname(response.data.surname);
@@ -51,7 +52,7 @@ const Profile = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(data);
+
     AdminService.updateAdmin(data).then(
       () => {
         const Toast = Swal.mixin({
@@ -72,20 +73,22 @@ const Profile = () => {
 
         // window.location.reload(true);
       },
-      () => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-        });
+      (response) => {
+        if (response.response.status === 405) {
+          window.location.replace("/profile");
+        } else {
+          alert(response.response.data.message);
+        }
       }
     );
   };
   return (
     <div className="single">
-      <Sidebar />
-      <div className="singleContainer">
+      {isSidebarVisible && <Sidebar />}
+
+      <div className="profileContainer">
         <Navbar />
+
         <div className="top">
           <h2>{admin.firstName + " " + admin.surname}</h2>
         </div>

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const ADD_COMPANY = "http:/localhost/company/addcompany";
+const ADD_COMPANY = "http://34.173.89.16/company/addcompany";
 
-const GET_SUMMARY_ALL_COMPANY = "http://localhost/company/get-all-summary";
+const GET_SUMMARY_ALL_COMPANY = "http://34.173.89.16/company/get-all-summary";
 
-const GET_INFO_MANAGER_WITH_ID = "http://localhost/company/company/";
+const GET_INFO_MANAGER_WITH_ID = "localhost/company/company/";
 class CompanyService {
   addCompany(company) {
     return axios.post(ADD_COMPANY, company, {

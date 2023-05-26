@@ -16,16 +16,12 @@ const WidgetNewEmployee = () => {
   ]);
 
   useEffect(() => {
-    console.log("useEffect runs");
-
     axios
-      .get("http://localhost:9092/api/v1/manager/find-five-manager")
+      .get("http://34.173.89.16/manager/find-five-manager")
       .then((response) => {
         setWidgetmanager([...response.data]);
       });
-    return () => {
-      console.log("useEffect clean-up");
-    };
+    return () => {};
   }, []);
   return (
     <div className="widgetNew">
@@ -33,19 +29,18 @@ const WidgetNewEmployee = () => {
       {widgetmanager.map((employee, index) => (
         <div className="person-area">
           <img
-            src={PersonDenem}
+            src={employee.image}
             alt="employee-image"
             className="employee-icon"
           />
           <div className="info-employee">
             <p className="name-employee">
-              {" "}
               {employee.firstName} {employee.surname}
             </p>
             <p className="title-employee">Software Developer</p>
           </div>
           <Link
-            className="links"
+            className="linksa"
             to={"/manager/" + employee.id}
             style={{ textDecoration: "none" }}
           >

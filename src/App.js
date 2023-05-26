@@ -9,38 +9,40 @@ import ListCompany from "./pages/listCompany/ListCompany";
 import NewCompany from "./pages/newCompany/NewCompany";
 import SingleCompany from "./pages/singlecompany/SingleCompany";
 import NotFound from "./pages/notfound/NotFound";
-
+import { SidebarProvider } from "./context/SidebarContext";
 import { useEffect, useState, useContext } from "react";
 
 function App() {
   return (
     <div className="app">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="manager">
-              <Route index element={<List />} />
-              <Route path=":managerId" element={<Single />} />
-              <Route path="new" element={<New />} />
-            </Route>
-            {/* <Route path="employee">
+      <SidebarProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="manager">
+                <Route index element={<List />} />
+                <Route path=":managerId" element={<Single />} />
+                <Route path="new" element={<New />} />
+              </Route>
+              {/* <Route path="employee">
               <Route index element={<ListEmployee />} />
               <Route path=":employeeId" element={<Single />} />
             </Route> */}
-            <Route path="company">
-              <Route index element={<ListCompany />} />
-              <Route path=":companyId" element={<SingleCompany />} />
-              <Route path="new" element={<NewCompany />} />
+              <Route path="company">
+                <Route index element={<ListCompany />} />
+                <Route path=":companyId" element={<SingleCompany />} />
+                <Route path="new" element={<NewCompany />} />
+              </Route>
+              <Route path="profile">
+                <Route index element={<Profile />} />
+              </Route>
             </Route>
-            <Route path="profile">
-              <Route index element={<Profile />} />
-            </Route>
-          </Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </BrowserRouter>
+            <Route path="*" element={<NotFound />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </SidebarProvider>
     </div>
   );
 }
