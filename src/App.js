@@ -11,6 +11,9 @@ import SingleCompany from "./pages/singlecompany/SingleCompany";
 import NotFound from "./pages/notfound/NotFound";
 import { SidebarProvider } from "./context/SidebarContext";
 import { useEffect, useState, useContext } from "react";
+import Calendar from "./pages/calendar/Calendar";
+import Calendars from "./pages/calendar/Calendar";
+import Inbox from "./pages/inbox/Inbox";
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
             <Route path="/">
               <Route index element={<Home />} />
               <Route path="login" element={<Login />} />
+              <Route path="calendar" element={<Calendars />} />
+              <Route path="inbox" element={<Inbox />} />
               <Route path="manager">
                 <Route index element={<List />} />
                 <Route path=":managerId" element={<Single />} />

@@ -15,7 +15,8 @@ import { useEffect, useState, useContext } from "react";
 import Cookies from "js-cookie";
 import Logout from "../logout/Logout";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 const Sidebar = () => {
   const [admin, setAdmin] = useState({});
   const token = Cookies.get("token");
@@ -56,6 +57,18 @@ const Sidebar = () => {
             <li>
               <DashboardOutlinedIcon className="icon" />
               <span>Dashboard</span>
+            </li>
+          </Link>
+          <Link to="/calendar" style={{ textDecoration: "none" }}>
+            <li>
+              <CalendarMonthOutlinedIcon className="icon" />
+              <span>Calendar</span>
+            </li>
+          </Link>
+          <Link to="/inbox" style={{ textDecoration: "none" }}>
+            <li>
+              <MailOutlinedIcon className="icon" />
+              <span>Inbox</span>
             </li>
           </Link>
           <p className="title">LIST</p>
