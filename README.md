@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# Human Resources Management Admin Panel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Human Resources Management (HRM) project, the administrator has the ability to add managers, add companies, schedule meetings for managers, and update profile information.
 
-## Available Scripts
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679646-10e7a3cf-a262-4ca2-a779-e77d9706c404.jpg)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Inbox
+- Mail service
+- Notification
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Install project with npm
 
-### `npm test`
+```bash
+  git clone https://github.com/humanresourcesteam/react.js-adminpanel.git
+  cd my-project
+  npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Run Locally
 
-### `npm run build`
+Clone the project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  git clone https://github.com/humanresourcesteam/react.js-adminpanel.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go to the project directory
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+  cd my-project
+```
 
-### `npm run eject`
+Install dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+  npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+  npm run start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Run Docker
 
-## Learn More
+Clone the project
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+  docker push aliogutcen/my-react-app:16
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Running on Docker
 
-### Code Splitting
+```bash
+  docker build -t <my-react-app> .
+  docker run -p 3000:3000 <my-react-app>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Usage/Examples
 
-### Analyzing the Bundle Size
+```javascript
+import "./time.scss";
+import lottie from "lottie-web";
+import { useEffect, useRef } from "react";
+import BestEmployee from "../bestEmployee/BestEmployee";
+import ProjectList from "../project-list/ProjectList";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+const ProjectTime = () => {
+  const container = useRef(null);
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: container.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../../launch.json"),
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice",
+      },
+    });
+  }, []);
+  return (
+    <div className="project-time">
+      <div className="project-side-table">
+        <ProjectList />
+      </div>
+    </div>
+  );
+};
 
-### Making a Progressive Web App
+export default ProjectTime;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Screenshot
 
-### Advanced Configuration
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679652-ddd7040c-e453-459a-81e2-c58dbe214979.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679630-74beb681-9a80-4323-b48d-d83f3fd1734c.jpg)
 
-### Deployment
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679632-318c59f0-d6bf-4fb1-9838-6094fa91ca02.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679633-21cf0552-9619-44a2-854e-238049cf653e.jpg)
 
-### `npm run build` fails to minify
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679636-9e832e50-c04f-4a72-9fe8-9bc45f031284.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679640-d216f7e0-2ddd-4ad1-ba08-80dc56cbf47f.jpg)
+
+![App Screenshot](https://user-images.githubusercontent.com/85200452/242679644-a902e512-7e9c-4555-869a-0aa19025fa3b.jpg)

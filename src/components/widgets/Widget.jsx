@@ -31,20 +31,16 @@ const useFetchData = (token) => {
   const [expense, setExpense] = useState(0);
 
   useEffect(() => {
-    axios
-      .get("http://34.173.89.16/manager/get-all-summary")
-      .then((response) => {
-        setListAdvances([...response.data]);
-      });
+    axios.get("http://localhost/manager/get-all-summary").then((response) => {
+      setListAdvances([...response.data]);
+    });
     return () => {};
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://34.173.89.16/company/get-all-summary")
-      .then((response) => {
-        setListPermission([...response.data]);
-      });
+    axios.get("http://localhost/company/get-all-summary").then((response) => {
+      setListPermission([...response.data]);
+    });
     return () => {};
   }, []);
 
@@ -82,7 +78,7 @@ const Widget = ({ type }) => {
         title: "TOTAL EMPLOYEE",
         link: "See all manager",
         class: "total",
-        count: worker,
+        count: 10,
         icon: <img className="widget-imga" src={ProjectImage} alt="" />,
         background: "#dad7f4",
       };

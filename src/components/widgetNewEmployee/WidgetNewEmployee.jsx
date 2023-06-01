@@ -16,11 +16,9 @@ const WidgetNewEmployee = () => {
   ]);
 
   useEffect(() => {
-    axios
-      .get("http://34.173.89.16/manager/find-five-manager")
-      .then((response) => {
-        setWidgetmanager([...response.data]);
-      });
+    axios.get("http://localhost/manager/find-five-manager").then((response) => {
+      setWidgetmanager([...response.data]);
+    });
     return () => {};
   }, []);
   return (
